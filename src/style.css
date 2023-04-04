@@ -1,4 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    color: white;
+    color: #e8e8e8;
     background-color: black;
+    
   }
+
+.main-container{
+    display: flex;
+    flex-direction: row;
+    min-height: 100dvh;
+}
+
+.sidebar{
+    width: 280px;
+    background-color: #121212;
+    padding: 12px;
+}
+
+.image-brand{
+    width: 25px;
+    height: auto;
+}
+
+.sidebar-brand{
+    display: flex;
+    flex-direction: row;
+}
+
+.main-content{
+    flex-grow: 1;
+    background-color: #242424;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.todos-view{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todos{
+    display: flex;
+    flex-direction: row;
+}
+
+.todos > * {
+    width: 5rem;
+}
+
+.todo-tasks, #todosTasksTitle{
+    width: 14rem;
+}
+
+.todos-general-titles {
+    font-weight: 700;
+}
