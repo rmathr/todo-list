@@ -4,11 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/tasks.png">
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
     <title>Todo!</title>
 </head>
 <body>
-    <div>Teste</div>
+    <div class="main-container" id="mainContainer">
+        <section class="sidebar" id="sidebar">
+            <div class="sidebar-brand" id="sidebarBrand">
+                <img class="image-brand" src="../src/tasks.png" srcset="">
+                <p class="sidebar-title" id="sidebarTitle">zenith</p>
+            </div>
+            <p class="text">Teste</p>
+            <p class="text">Teste</p>
+            <p class="text">Teste</p>
+            <p class="text">Teste</p>
+            <p class="text">Teste</p>
+        </section>
+        <main class="main-content" id="mainContent">
+            <section class="todos-view" id="todosView">
+                <div class="todos todos-general-titles">
+                    <p class="todos-titles" id="todosTasksTitle">tasks</p>
+                    <p class="todos-titles">status</p>
+                    <p class="todos-titles">list</p>
+                    <p class="todos-titles">priority</p>
+                    <p class="todos-titles">due date</p>
+                </div>
+            </section>
+            <form action="" class="new-task" id="newTask">
+                <input type="text" name="taskInput" id="taskInput" placeholder="Enter a new task!">
+                <select name="statusInput" id="statusInput">
+                    <option value="todo">to-do</option>
+                    <option value="doing">doing</option>
+                    <option value="done">done</option>
+                    <option value="wontdo">wont do</option>
+                </select>
+                <input type="text" name="listInput" id="listInput" placeholder="List">
+                <input type="text" name="priorityInput" id="priorityInput" placeholder="Priority">
+                <input type="text" name="dueDateInput" id="dueDateInput" placeholder="due date">
+                <button type="submit" class="add-task" id="addTask">Save</button>
+            </form>
+
+
+        </main>
+    </div>
 </body>
 </html>
