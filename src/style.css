@@ -54,7 +54,7 @@ body {
     flex-direction: row;
 }
 
-.todos > * {
+.todos > *, .todos-general-titles > *{
     width: 5rem;
 }
 
@@ -63,5 +63,18 @@ body {
 }
 
 .todos-general-titles {
+    display: flex;
+    flex-direction: row;
     font-weight: 700;
+}
+
+.delete-task{
+    width: fit-content;
+}
+
+.change-status{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
 }

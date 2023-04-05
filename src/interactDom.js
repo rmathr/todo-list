@@ -14,19 +14,33 @@ const interactDOM = function(){
         return elem
     }
 
-    const appendElementAndDefineContent = function(container, obj, index){
+    const returnAllMatchingElements = function(className){
+        return document.querySelectorAll(`.${className}`)
+    }
+
+    const getInputValue = function(idName){
+        return interactDOM().hookDOMelement(idName).value
+    }
+
+    const toggleElementDisplay = function(element, display){
+        if(element.style.display === 'none'){
+            element.style.display = `${display}`
+        } else {
+            element.style.display = 'none'
+        }
+    }
+
+    const appendElementAndDefineContent = function (container, obj, index) {
         let task = interactDOM().createElementWithClassAndId('p', 'todo-tasks', `task${index}`)
         let status = interactDOM().createElementWithClassAndId('p', 'todo-status', `status${index}`)
         let list = interactDOM().createElementWithClassAndId('p', 'todo-lists', `list${index}`)
         let priority = interactDOM().createElementWithClassAndId('p', 'todo-priority', `priority${index}`)
         let dueDate = interactDOM().createElementWithClassAndId('p', 'todo-due-date', `dueDate${index}`)
-        
         container.appendChild(task)
         container.appendChild(status)
         container.appendChild(list)
         container.appendChild(priority)
         container.appendChild(dueDate)
-
         task.textContent = `${obj.task}`
         status.textContent = `${obj.status}`
         list.textContent = `${obj.list}`
@@ -34,10 +48,16 @@ const interactDOM = function(){
         dueDate.textContent = `${obj.dueDate}`
     }
 
-
-
-
-    return { mainContent, createElementWithClassAndId, hookDOMelement, appendElementAndDefineContent }
+  
+    return { 
+        mainContent, 
+        createElementWithClassAndId, 
+        hookDOMelement, 
+        returnAllMatchingElements, 
+        getInputValue, 
+        appendElementAndDefineContent, 
+        toggleElementDisplay 
+    }
 }
 
 export default interactDOM
