@@ -22,12 +22,16 @@ const interactDOM = function(){
         return interactDOM().hookDOMelement(idName).value
     }
 
-    const toggleElementDisplay = function(element, display){
-        if(element.style.display === 'none'){
-            element.style.display = `${display}`
-        } else {
+    const toggleElementDisplay = function(element){
+        if(element.style.display == 'flex'){
             element.style.display = 'none'
+        } else {
+            element.style.display = 'flex'
         }
+    }
+
+    const hide = function(element){
+        element.style.display = 'none'
     }
 
     const appendElementAndDefineContent = function (container, obj, index) {
@@ -56,7 +60,8 @@ const interactDOM = function(){
         returnAllMatchingElements, 
         getInputValue, 
         appendElementAndDefineContent, 
-        toggleElementDisplay 
+        toggleElementDisplay,
+        hide 
     }
 }
 

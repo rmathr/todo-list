@@ -7,7 +7,6 @@
 body {
     color: #e8e8e8;
     background-color: black;
-    
   }
 
 .main-container{
@@ -39,6 +38,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+   
 }
 
 .todos-view{
@@ -73,8 +73,9 @@ body {
 }
 
 .change-status{
-    display: none;
+    /* display: none; */
+    width: 100px;
+    height: 120px;
     flex-direction: column;
     position: absolute;
-    z-index: 2;
 }

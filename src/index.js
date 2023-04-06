@@ -11,7 +11,7 @@ const deleteTask = index => {
     displayTasks(todos)
 }
 
-const changeStatus = function (index, statusValue) {
+const modifyStatus = function (index, statusValue) {
     const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     
     todos.splice(index, 1, todo)
@@ -87,22 +87,47 @@ const todosView = interactDOM().hookDOMelement('todosView')
 
 
 function controlStatusChange(element, index){
-    const changeStatus = interactDOM().hookDOMelement('changeStatus')
-    const { top, left } = element.getBoundingClientRect();
-    interactDOM().toggleElementDisplay(changeStatus, 'flex')
+    // const changeStatus = interactDOM().hookDOMelement('changeStatus')
+    const changeStatus = interactDOM().createElementWithClassAndId('div', 'change-status', 'changeStatus')
+    const buttons = ['to-do', 'doing', 'done', 'wont do'];
+        buttons.forEach((button) => {
+          const buttonElement = interactDOM().createElementWithClassAndId('button', 'change-status-button', `${buttons[buttons.indexOf(button)]}#id`)
+          buttonElement.value = button;
+          buttonElement.textContent = button;
+          changeStatus.appendChild(buttonElement);
+        });
+    const { top, left } = element.getBoundingClientRect()
+    // interactDOM().toggleElementDisplay(changeStatus)
+    changeStatus.style.position = 'absolute'
+    changeStatus.style.display = 'flex'
     changeStatus.style.top = `${top}px`;
     changeStatus.style.left = `${left}px`; 
-    const buttons = document.querySelectorAll('div#changeStatus > button')
-    buttons.forEach(button => 
-        button.addEventListener('click', e => {
-            e.preventDefault()
-            console.log(e.target.value)
-            interactDOM().toggleElementDisplay(changeStatus, 'flex')
+    document.body.appendChild(changeStatus);
+    
+    changeStatus.addEventListener('mouseleave', e => {
+        setInterval( function() {changeStatus.remove()}, 500)
+    })
 
-        })
-        )
+
+    changeStatus.addEventListener('click', e =>{
+        if (e.target.classList.contains('change-status-button')){
+             console.log(e.target.value);
+             modifyStatus(index, `${e.target.value}`)
+            //  interactDOM().hide(changeStatus);
+            changeStatus.remove()
+             displayTasks(todos)  
+        }
+     })
 }
 
+const closePopup = function (){
+    const changeStatus = interactDOM().hookDOMelement('changeStatus')
+    document.addEventListener('click', e =>{
+        if(document.body.contains(changeStatus)){
+            changeStatus.remove()
+        }
+    })
+}
 
 
 function handleStatusChange (element, index){
@@ -127,7 +152,7 @@ function handleStatusChange (element, index){
         changeValue.addEventListener('click', e => {
             console.log(changeValue.size)
             changeValue.addEventListener('change', (event) => {    
-                changeStatus(index, `${event.target.value}`)
+                modifyStatus(index, `${event.target.value}`)
                 changeValue.remove(); 
             })
             document.body.addEventListener('click', e =>{
@@ -153,7 +178,7 @@ todosView.addEventListener('click', (e) => {
         deleteTask(e.target.id)
         
     } else if (e.target.classList.contains('todo-status')) {
-        let index = +`${e.target.id}`.replace("status", "")
+        const index = +`${e.target.id}`.replace("status", "")
         console.log(index)
         // handleStatusChange (e.target, index)
         controlStatusChange(e.target, index)
