@@ -12,8 +12,16 @@ const priorityChanger = props => ({
     }
 })
 
-const modifyStatus = function (index, statusValue, todos) {
+function modifyStatus (index, statusValue, todos) {
     const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
+    
+    todos.splice(index, 1, todo)
+
+    displayTasks(todos)
+}
+
+function modifyPriority (index, priorityValue, todos) {
+    const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${todos[index].list}`, `${priorityValue}`, `${todos[index].dueDate}`)
     
     todos.splice(index, 1, todo)
 
@@ -32,4 +40,4 @@ function todoCreator(task, status, list, priority, dueDate){
     return Object.assign(todo, statusChanger(todo), priorityChanger(todo))
 }
 
-export default {todoCreator , modifyStatus}
+export { modifyStatus, modifyPriority ,todoCreator}

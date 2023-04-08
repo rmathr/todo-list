@@ -8,7 +8,10 @@ export default function displayTasks(array){
     for(let i = 0; i < array.length; i++){
         let container = interactDOM().createElementWithClassAndId('div', 'todos', `todo${i}`)
         let deleteTask = interactDOM().createElementWithClassAndId('button', 'delete-task', `${i}`)
+        let checkbox = interactDOM().createElementWithClassAndId('input', 'check-task', `checktask#${i}`)
+        checkbox.type = 'checkbox'
         deleteTask.textContent = 'x'
+        container.appendChild(checkbox)
         interactDOM().appendElementAndDefineContent(container, array[i], i)
         todosView.appendChild(container)
         container.appendChild(deleteTask)

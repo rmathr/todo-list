@@ -32,19 +32,37 @@
                     <p class="todos-titles">due date</p>
                 </div>
             </section>
-            <form action="" class="new-task" id="newTask">
-                <input type="text" name="taskInput" id="taskInput" placeholder="Enter a new task!">
-                <select name="statusInput" id="statusInput">
-                    <option value="todo">to-do</option>
-                    <option value="doing">doing</option>
-                    <option value="done">done</option>
-                    <option value="wontdo">wont do</option>
-                </select>
-                <input type="text" name="listInput" id="listInput" placeholder="List">
-                <input type="text" name="priorityInput" id="priorityInput" placeholder="Priority">
-                <input type="text" name="dueDateInput" id="dueDateInput" placeholder="due date">
-                <button type="submit" class="add-task" id="addTask">Save</button>
-            </form>
+
+            <section class="add-new-task" id="addNewTask">
+                <button class="open-task-form" id="openTaskForm">
+                    <img class="task-form-image" src="../src/plus-button.png" alt="" srcset="">
+                    <p class="button-task-text">New task</p>
+                </button>
+    
+                <form action="" class="new-task" id="newTask" style="display:none">
+                    <input type="text" name="taskInput" id="taskInput" placeholder="Enter a new task!">
+                    <select name="statusInput" id="statusInput">
+                        <option value="" selected hidden disabled>status</option>
+                        <option value="todo">to-do</option>
+                        <option value="doing">doing</option>
+                        <option value="done">done</option>
+                        <option value="wontdo">wont do</option>
+                    </select>
+                    <input type="text" name="listInput" id="listInput" placeholder="List">
+                   
+    
+                    <select name="priorityInput" id="priorityInput">
+                        <option value="" selected hidden disabled>priority</option>
+                        <option value="high">high</option>
+                        <option value="medium">medium</option>
+                        <option value="low">low</option>
+                    </select>
+    
+                    <input type="date" name="dueDateInput" id="dueDateInput" placeholder="due date">
+                    <button type="submit" class="add-task" id="addTask">Save</button>
+                </form>
+            </section>
+            
 
 
         </main>

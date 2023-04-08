@@ -52,6 +52,29 @@ const interactDOM = function(){
         dueDate.textContent = `${obj.dueDate}`
     }
 
+
+    const generateListOptions = function ({top, left}, array, property){
+        
+        const element = interactDOM().createElementWithClassAndId('div', `change-${property}`, `change${property}Id`)
+        // const buttons = ['to-do', 'doing', 'done', 'wont do'];
+        const buttons = array;
+        buttons.forEach((button) => {
+          const buttonElement = interactDOM().createElementWithClassAndId('button', `change-${property}-button`, `${property}change${buttons.indexOf(button)}#id`)
+          buttonElement.value = button;
+          buttonElement.textContent = button;
+          element.appendChild(buttonElement);
+        });
+    
+   
+    element.style.position = 'absolute'
+    element.style.display = 'flex'
+    element.style.top = `${top}px`;
+    element.style.left = `${left}px`; 
+    document.body.appendChild(element);
+
+    return element
+    }
+
   
     return { 
         mainContent, 
@@ -61,7 +84,8 @@ const interactDOM = function(){
         getInputValue, 
         appendElementAndDefineContent, 
         toggleElementDisplay,
-        hide 
+        hide,
+        generateListOptions 
     }
 }
 
