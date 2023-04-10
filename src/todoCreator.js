@@ -28,6 +28,14 @@ function modifyPriority (index, priorityValue, todos) {
     displayTasks(todos)
 }
 
+function modifyList (index, listValue, todos) {
+    const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${listValue}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
+    
+    todos.splice(index, 1, todo)
+
+    displayTasks(todos)
+}
+
 function todoCreator(task, status, list, priority, dueDate){
     let todo = {
         task,
@@ -40,4 +48,4 @@ function todoCreator(task, status, list, priority, dueDate){
     return Object.assign(todo, statusChanger(todo), priorityChanger(todo))
 }
 
-export { modifyStatus, modifyPriority ,todoCreator}
+export { modifyStatus, modifyPriority, modifyList, todoCreator}

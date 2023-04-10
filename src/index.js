@@ -5,9 +5,13 @@ import { todoCreator } from "./todoCreator"
 import { modifyStatus } from "./todoCreator"
 import controlStatusChange from "./controlStatusChange"
 import controlPriorityChange from "./controlPriorityChange"
+import controlListChange from "./controlListChange"
+import { createList } from "./createList"
+import displayLists from "./displayLists"
 
 
 const todos = []
+const lists = []
 
 
 
@@ -73,7 +77,10 @@ todosView.addEventListener('click', (e) => {
         controlPriorityChange(e.target, index, todos) 
     } else if (e.target.classList.contains('check-task')){
         e.target.classList.toggle('clicked')
-    } 
+    } else if (e.target.classList.contains('todo-lists')){
+        const index = +`${e.target.id}`.replace("list", "")
+        controlListChange(e.target, index, lists, todos)
+    }
     
     else {
         displayTasks(todos)
@@ -81,33 +88,33 @@ todosView.addEventListener('click', (e) => {
 });
 
 
+// document.addEventListener('mousedown', e=> {
+//     console.log(e.target)
+// })
+
+
+// =========================== add new task functionality, soon will be in a module
 const openTaskForm = interactDOM().hookDOMelement('openTaskForm')
+// const addNewTask = interactDOM().hookDOMelement('addNewTask')
 
 const handleNewTaskButton = function (e){
     e.preventDefault()
-
-
     const newTask = interactDOM().hookDOMelement('newTask')
     interactDOM().toggleElementDisplay(newTask)
-    
     document.body.addEventListener('mousedown', e => {
         if(!e.target.parentNode.classList.contains('new-task')){
             // console.log(e.target)
             interactDOM().hide(newTask)
+            // newTask.remove()
         }
     })
-    
-
 }
-
 openTaskForm.addEventListener('click', e =>{
     handleNewTaskButton(e)
 })
+// =========================== add new task functionality, soon will be in a module
 
 
-document.addEventListener('click', e=> {
-    console.log(e.target)
-})
 
 const createTaskForm = function (){
     const newTask = interactDOM().createElementWithClassAndId('form', 'new-task', 'newTask')
@@ -122,9 +129,17 @@ const createTaskForm = function (){
         optionElement.textContent = item
         statusInput.appendChild(optionElement)
     })
-    const listInput = interactDOM().createElementWithClassAndId('input', 'text-input', 'listInput')
-    listInput.type = 'text'
-    listInput.placeholder = 'List'
+    
+    const listInput = interactDOM().createElementWithClassAndId('select', 'select-input', 'listInput')
+    const listArray = lists.map( list => list.listName)
+    listArray.forEach(item => {
+        const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
+        optionElement.value = item
+        optionElement.textContent = item
+        listInput.appendChild(optionElement)
+    })
+    // listInput.type = 'text'
+    // listInput.placeholder = 'List'
 
     const priorityInput = interactDOM().createElementWithClassAndId('select', 'select-input', 'priorityInput')
     const priorities = ['high', 'medium', 'low']
@@ -159,3 +174,40 @@ addTask.addEventListener('click', e =>{
 
     return newTask
 }
+
+
+const list1 = createList('general')
+const list2 = createList('Nemo')
+const list3 = createList('Project')
+lists.push(list1)
+lists.push(list2)
+lists.push(list3)
+console.log(lists.map( list => list.listName))
+displayLists(lists)
+
+const listInput = interactDOM().hookDOMelement('listInput')
+const listArray = lists.map( list => list.listName)
+    listArray.forEach(item => {
+        const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
+        optionElement.value = item
+        optionElement.textContent = item
+        listInput.appendChild(optionElement)
+    })
+
+
+const newList = interactDOM().hookDOMelement('newList')
+
+
+function handleNewListForm (e){
+    e.preventDefault()
+    const newListForm = interactDOM().hookDOMelement('newListForm')
+    interactDOM().toggleElementDisplay(newListForm)
+    
+
+}
+
+newList.addEventListener('click', e => {
+    handleNewListForm(e)
+})
+
+

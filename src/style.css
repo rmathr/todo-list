@@ -95,7 +95,7 @@ body {
     align-self: center;
 }
 
-.change-status, .change-priority{
+.change-status, .change-priority, .change-list{
     /* display: none; */
     width: 100px;
     height: 120px;
@@ -112,7 +112,7 @@ body {
     grid-template-columns: 1fr 8fr; */
 }
 
-.open-task-form{
+.open-task-form, .new-list{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -140,7 +140,7 @@ body {
     padding: 1px;
 }
 
-.check-task:hover, .delete-task:hover{
+.check-task:hover, .delete-task:hover, .open-task-form:hover, .new-list:hover{
     cursor: pointer;
 }
 
@@ -153,3 +153,49 @@ body {
     height: auto;
 }
 
+.new-list {
+    margin-top: 24px;
+}
+
+.new-list-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 300px;
+    background-color: #121212;
+    color: #e8e8e8;
+    flex-direction: column;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.add-list-form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 200px;
+    justify-content: space-evenly;
+}
+
+.add-list-form input {
+    background-color: transparent;
+    border: 1px solid rgba(232, 232, 232, 0.1);
+    border-radius: 5px;
+    margin-top: 8px;
+}
+
+.new-list-buttons{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.new-list-form-title{
+    width: 90%;
+}

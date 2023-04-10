@@ -34,6 +34,10 @@ const interactDOM = function(){
         element.style.display = 'none'
     }
 
+    const show = function(element){
+        element.style.display = 'flex'
+    }
+
     const appendElementAndDefineContent = function (container, obj, index) {
         let task = interactDOM().createElementWithClassAndId('p', 'todo-tasks', `task${index}`)
         let status = interactDOM().createElementWithClassAndId('p', 'todo-status', `status${index}`)
@@ -50,6 +54,12 @@ const interactDOM = function(){
         list.textContent = `${obj.list}`
         priority.textContent = `${obj.priority}`
         dueDate.textContent = `${obj.dueDate}`
+    }
+
+    const appendListElementandDefineContent = function(container, obj, index){
+        let list = interactDOM().createElementWithClassAndId('p', 'list-item', `list${index}`)
+        container.appendChild(list)
+        list.textContent = `${obj.listName}`
     }
 
 
@@ -82,9 +92,11 @@ const interactDOM = function(){
         hookDOMelement, 
         returnAllMatchingElements, 
         getInputValue, 
-        appendElementAndDefineContent, 
+        appendElementAndDefineContent,
+        appendListElementandDefineContent, 
         toggleElementDisplay,
         hide,
+        show,
         generateListOptions 
     }
 }
