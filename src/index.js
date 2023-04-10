@@ -58,7 +58,7 @@ const todosView = interactDOM().hookDOMelement('todosView')
 
 
 todosView.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-task')) {
+    if (e.target.classList.contains('delete-image')) {
         // console.log(e.target.id)
         deleteTask(e.target.id)
         
@@ -71,7 +71,11 @@ todosView.addEventListener('click', (e) => {
         const index = +`${e.target.id}`.replace("priority", "")
         // console.log(index)
         controlPriorityChange(e.target, index, todos) 
-    } else {
+    } else if (e.target.classList.contains('check-task')){
+        e.target.classList.toggle('clicked')
+    } 
+    
+    else {
         displayTasks(todos)
     }
 });
@@ -100,6 +104,10 @@ openTaskForm.addEventListener('click', e =>{
     handleNewTaskButton(e)
 })
 
+
+document.addEventListener('click', e=> {
+    console.log(e.target)
+})
 
 const createTaskForm = function (){
     const newTask = interactDOM().createElementWithClassAndId('form', 'new-task', 'newTask')
