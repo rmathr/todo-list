@@ -87,7 +87,11 @@ const interactDOM = function(){
     return element
     }
 
-  
+    const formReset = function(formId){
+    const form = interactDOM().hookDOMelement(`${formId}`)
+    form.reset()    
+    }
+    
     return { 
         mainContent, 
         createElementWithClassAndId, 
@@ -99,7 +103,8 @@ const interactDOM = function(){
         toggleElementDisplay,
         hide,
         show,
-        generateListOptions 
+        generateListOptions,
+        formReset 
     }
 }
 

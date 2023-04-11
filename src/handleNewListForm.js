@@ -11,6 +11,7 @@ export default function handleNewListForm (e){
         && !e.target.parentNode.classList.contains('label-input-description')
         && !e.target.parentNode.classList.contains('new-list-buttons')
         && !e.target.classList.contains('new-list-form')
+        && !e.target.parentNode.classList.contains('new-list')
         || e.target.classList.contains('cancel-list-add')){
             // console.log(e.target)
             interactDOM().hide(newListForm)

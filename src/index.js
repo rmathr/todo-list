@@ -9,6 +9,7 @@ import controlListChange from "./controlListChange"
 import { createList } from "./createList"
 import displayLists from "./displayLists"
 import handleNewListForm from "./handleNewListForm"
+import handleNewTaskForm from "./handleNewTaskForm"
 
 const todos = []
 const lists = []
@@ -51,11 +52,12 @@ const addTasks = function(){
     let dueDate = interactDOM().getInputValue('dueDateInput')
     const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
     todos.push(todo)
+    interactDOM().formReset('newTask')
 }
 
 displayTasks(todos)
 
-
+// =============== edit tasks logic, soon will be a module
 const todosView = interactDOM().hookDOMelement('todosView')
 todosView.addEventListener('click', (e) => {
     if (e.target.parentNode.classList.contains('delete-task')) {
@@ -82,48 +84,13 @@ todosView.addEventListener('click', (e) => {
         displayTasks(todos)
     }
 });
+// =============== edit tasks logic, soon will be a module
 
-
-document.addEventListener('mousedown', e=> {
-    console.log(e.target)
-})
-
-
-// =========================== add new task functionality, soon will be in a module
-
-
-const openTaskForm = interactDOM().hookDOMelement('openTaskForm')
-// const addNewTask = interactDOM().hookDOMelement('addNewTask')
-const newTask = interactDOM().hookDOMelement('newTask')
-
-
-
-const handleNewTaskButton = function (e){
-    e.preventDefault()
-    interactDOM().toggleElementDisplay(newTask);
-    // interactDOM().show(newTask)
-
-}
-openTaskForm.addEventListener('mousedown', e =>{
-    e.preventDefault()
-    e.stopPropagation()
-    handleNewTaskButton(e)
-
-    // interactDOM().toggleElementDisplay(newTask);
-})
-// openTaskForm.addEventListener('mousedown', e =>{
-//     e.preventDefault()
-//     handleNewTaskButton(e)
-
-//     // interactDOM().toggleElementDisplay(newTask);
+// document.addEventListener('mousedown', e=> {
+//     console.log(e.target)
 // })
-document.body.addEventListener('mousedown', e => {
-    if(!e.target.parentNode.classList.contains('new-task') && !e.target.parentNode.classList.contains('open-task-form')){
-        interactDOM().hide(newTask)
-    } 
-})
-// =========================== add new task functionality, soon will be in a module
 
+handleNewTaskForm()
 
 
 const createTaskForm = function (){
@@ -221,6 +188,7 @@ const addList = function (){
     const list = interactDOM().getInputValue('listName')
     const newList = createList(list)
     lists.push(newList)
+    interactDOM().formReset('addListForm')
 }
 
 addNewList.addEventListener('click', e =>{

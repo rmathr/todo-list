@@ -22,6 +22,8 @@ body {
     width: 280px;
     background-color: #121212;
     padding: 12px;
+    display: flex;
+    flex-direction: column;
 }
 
 .image-brand{
@@ -34,13 +36,43 @@ body {
     flex-direction: row;
 }
 
+.sidebar-title {
+    margin-left: 12px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lists-view{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 56px;
+}
+
+.lists-view-title{
+    height: 1.6rem;
+    width: 70%;
+    border-bottom: 1px solid rgba(232, 232, 232, 0.1); 
+}
+
+.lists {
+    height: 1.6rem;
+    margin: 4px 0; 
+}
+
+.new-list {
+    margin-top: 12px;
+}
+
 .main-content{
     flex-grow: 1;
     background-color: #242424;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    padding-top: 10%;
 }
 
 .todos-view{
@@ -153,9 +185,7 @@ body {
     height: auto;
 }
 
-.new-list {
-    margin-top: 24px;
-}
+
 
 .new-list-form{
     position: absolute;
@@ -187,7 +217,11 @@ body {
     border: 1px solid rgba(232, 232, 232, 0.1);
     border-radius: 5px;
     margin-top: 8px;
+    color: #e8e8e8;
 }
+
+
+
 
 .new-list-buttons{
     width: 90%;
