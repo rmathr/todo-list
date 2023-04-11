@@ -16,11 +16,12 @@
                 <img class="image-brand" src="../src/tasks.png" srcset="">
                 <p class="sidebar-title" id="sidebarTitle">zenith</p>
             </div>
-            <p class="text">Teste</p>
-            <p class="text">Teste</p>
-            <p class="text">Teste</p>
-            <p class="text">Teste</p>
-            <p class="text">Teste</p>
+            <section class="lists-view" id="listsView">
+            </section>
+           <button class="new-list" id="newList">
+            <p class="new-list-plus" id="newListPlus">+</p>
+            <p class="new-list-text" id="newListText">New list</p>
+        </button>
         </section>
         <main class="main-content" id="mainContent">
             <section class="todos-view" id="todosView">
@@ -49,8 +50,9 @@
                         <option value="done">done</option>
                         <option value="wontdo">wont do</option>
                     </select>
-                    <input type="text" name="listInput" id="listInput" placeholder="List">
-                   
+                    
+                    <!-- <input type="text" name="listInput" id="listInput" placeholder="List"> -->
+                   <select name="listInput" id="listInput"></select>
     
                     <select name="priorityInput" id="priorityInput">
                         <option value="" selected hidden disabled>priority</option>
@@ -74,5 +76,26 @@
         <button type="button" class="change-status-button" id="doneButton" value="done">done</button>
         <button type="button" class="change-status-button" id="wontDoButton" value="wont do">wont do</button>
     </div> -->
+
+    <section class="new-list-form" id="newListForm" style="display: none;">
+        <p class="new-list-form-title">List</p>
+        <form action="" class="add-list-form" id="addListForm">
+            <div class="label-input-name">
+                <label for="listName">Name</label>
+                <input type="text" name="listName" id="listName" class="list-name" placeholder="List name">
+            </div>
+            <div class="label-input-description">
+                <label for="listDescription">Description (optional)</label>
+                <input type="text" name="listDescription" id="listDescription" class="list-description">
+            </div>
+            
+        </form>
+        <section class="new-list-buttons" id="newListButtons">
+            <button class="cancel-list-add" id="cancelListAdd">Cancel</button>
+            <button class="add-new-list" id="addNewList">Create</button>
+        </section>
+        
+    </section>
+
 </body>
 </html>
