@@ -1,3 +1,5 @@
+import format  from "date-fns/format"
+
 const interactDOM = function(){
     const mainContent = document.getElementById('mainContent')
 
@@ -53,7 +55,7 @@ const interactDOM = function(){
         status.textContent = `${obj.status}`
         list.textContent = `${obj.list}`
         priority.textContent = `${obj.priority}`
-        dueDate.textContent = `${obj.dueDate}`
+        dueDate.textContent = `${format(new Date(obj.dueDate), "MMM d',' yy")}`
     }
 
     const appendListElementandDefineContent = function(container, obj, index){
