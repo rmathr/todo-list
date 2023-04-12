@@ -4,6 +4,8 @@ export default function handleNewListForm (e){
     e.preventDefault()
     const newListForm = interactDOM().hookDOMelement('newListForm')
     interactDOM().toggleElementDisplay(newListForm)
+    const mainContainer = interactDOM().hookDOMelement('mainContainer')
+    mainContainer.classList.add('blur')
     document.body.addEventListener('mousedown', e => {
         if(!e.target.parentNode.classList.contains('new-list-form') 
         && !e.target.parentNode.classList.contains('add-list-form')

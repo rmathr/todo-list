@@ -3,6 +3,7 @@ import interactDOM from "./interactDom"
 import displayTasks from "./displayTasks"
 import { todoCreator } from "./todoCreator"
 import { modifyStatus } from "./todoCreator"
+import controlTaskChange from "./controlTaskChange"
 import controlStatusChange from "./controlStatusChange"
 import controlPriorityChange from "./controlPriorityChange"
 import controlListChange from "./controlListChange"
@@ -10,6 +11,8 @@ import { createList } from "./createList"
 import displayLists from "./displayLists"
 import handleNewListForm from "./handleNewListForm"
 import handleNewTaskForm from "./handleNewTaskForm"
+import filterByList from "./filterByList"
+import { createNewTask } from "./todoCreator"
 
 const todos = []
 const lists = []
@@ -22,14 +25,33 @@ const deleteTask = index => {
 }
 
 
-const todo1 = todoCreator('walk with Manchinha', 'to-do', 'daily', 'high', '03/04/2023')
-const todo2 = todoCreator('play Ravendawn', 'to-do', 'daily', 'high', '03/04/2023')
-const todo3 = todoCreator('study math', 'to-do', 'daily', 'medium', '06/04/2023')
+const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '03/04/2023', todos)
+const todo2 = createNewTask('play Ravendawn', 'to-do', 'daily', 'high', '03/04/2023', todos)
+const todo3 = createNewTask('study math', 'to-do', 'daily', 'medium', '06/04/2023', todos)
+const todo4 = createNewTask('play guitar', 'doing', 'general', 'low', '09/04/2023', todos)
+const todo5 = createNewTask('look for beavers', 'to-do', 'general', 'high', '12/04/2023', todos)
+const todo6 = createNewTask('try to catch a squirrel', 'to-do', 'general', 'low', '06/12/2023', todos)
+const todo7 = createNewTask('watch tv', 'doing', 'Nemo', 'medium', '11/04/2022', todos)
+const todo8 = createNewTask('take a shower', 'to-do', 'Project', 'high', '12/31/2024', todos)
+const todo9 = createNewTask('born', 'done', 'Nemo', 'high', '01/04/1993', todos)
+const todo10 = createNewTask('graduate at fanshawe', 'wont do', 'Project', 'medium', '02/04/2024', todos)
 
-todos.push(todo1)
-todos.push(todo2)
-todos.push(todo3)
+// todos.push(todo1)
+// todos.push(todo2)
+// todos.push(todo3)
+// todos.push(todo4)
+// todos.push(todo5)
+// todos.push(todo6)
+// todos.push(todo7)
+// todos.push(todo8)
+// todos.push(todo9)
+// todos.push(todo10)
 // console.log(todos)
+
+// todos.forEach(todo => todo.order = todos.indexOf(todo))
+// document.addEventListener('click', e =>{
+//     todos.forEach(todo => todo.order = todos.indexOf(todo))
+// })
 
 
 const addTask = interactDOM().hookDOMelement('addTask')
@@ -40,8 +62,6 @@ addTask.addEventListener('click', e =>{
     addTasks()
     displayTasks(todos)
 })
-
-
 
 
 const addTasks = function(){
@@ -74,15 +94,28 @@ todosView.addEventListener('click', (e) => {
         // console.log(index)
         controlPriorityChange(e.target, index, todos) 
     } else if (e.target.classList.contains('check-task')){
+        
         e.target.classList.toggle('clicked')
+        setInterval(function(){
+            if(e.target.classList.contains('clicked')){
+                completeTask(e.target)
+            }    
+        }, 2000)
+        
+        console.log(e.target)
+        
+
     } else if (e.target.classList.contains('todo-lists')){
         const index = +`${e.target.id}`.replace("list", "")
         controlListChange(e.target, index, lists, todos)
+    } else if(e.target.classList.contains('todo-tasks')){
+        const index = +`${e.target.id}`.replace("task", "")
+        controlTaskChange(e.target, index, todos)
     }
     
-    else {
-        displayTasks(todos)
-    }
+    // else {
+    //     displayTasks(todos)
+    // }
 });
 // =============== edit tasks logic, soon will be a module
 
@@ -93,72 +126,17 @@ todosView.addEventListener('click', (e) => {
 handleNewTaskForm()
 
 
-const createTaskForm = function (){
-    const newTask = interactDOM().createElementWithClassAndId('form', 'new-task', 'newTask')
-    const taskInput = interactDOM().createElementWithClassAndId('input', 'text-input', 'taskInput')
-    taskInput.type = 'text'
-    taskInput.placeholder = 'Enter a new task!'
-    const statusInput = interactDOM().createElementWithClassAndId('select', 'select-input', 'statusInput')
-    const status = ['to-do', 'doing', 'done', 'wont do']
-    status.forEach(item => {
-        const optionElement = interactDOM().createElementWithClassAndId('option', 'option-input', `status${status.indexOf(item)}`)
-        optionElement.value = item
-        optionElement.textContent = item
-        statusInput.appendChild(optionElement)
-    })
-    
-    const listInput = interactDOM().createElementWithClassAndId('select', 'select-input', 'listInput')
-    const listArray = lists.map( list => list.listName)
-    listArray.forEach(item => {
-        const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
-        optionElement.value = item
-        optionElement.textContent = item
-        listInput.appendChild(optionElement)
-    })
-    // listInput.type = 'text'
-    // listInput.placeholder = 'List'
 
-    const priorityInput = interactDOM().createElementWithClassAndId('select', 'select-input', 'priorityInput')
-    const priorities = ['high', 'medium', 'low']
-    priorities.forEach(priority => {
-        const optionElement = interactDOM().createElementWithClassAndId('option', 'option-input', `priority${priorities.indexOf(priority)}`)
-        optionElement.value = priority
-        optionElement.textContent = priority
-        priorityInput.appendChild(optionElement)
-    })
-    const dueDateInput = interactDOM().createElementWithClassAndId('input', 'text-input', 'dueDateInput')
-    dueDateInput.type = 'text'
-    dueDateInput.placeholder = 'due date'
-    const addTask = interactDOM().createElementWithClassAndId('button', 'add-task', 'addTask')
-    addTask.type = 'submit'
-    addTask.textContent = 'Save'
-
-    newTask.appendChild(taskInput)
-    newTask.appendChild(statusInput)
-    newTask.appendChild(listInput)
-    newTask.appendChild(priorityInput)
-    newTask.appendChild(dueDateInput)
-    newTask.appendChild(addTask)
-   
-
-    
-addTask.addEventListener('click', e =>{
-    e.preventDefault()
-    addTasks()
-    displayTasks(todos)
-})
-
-
-    return newTask
-}
 
 // ======================= list add logic, soon will be a new module  
 const list1 = createList('general')
 const list2 = createList('Nemo')
 const list3 = createList('Project')
+const list4 = createList('daily')
 lists.push(list1)
 lists.push(list2)
 lists.push(list3)
+lists.push(list4)
 console.log(lists.map( list => list.listName))
 displayLists(lists)
 
@@ -200,3 +178,41 @@ addNewList.addEventListener('click', e =>{
 })
 
 // ======================= list add logic, soon will be a new module
+
+function completeTask(element) {
+    const index = +`${element.id}`.replace("checktask#", "")
+    // console.log(element)
+    modifyStatus(index, 'done', todos)
+   
+}
+
+// ======================== filter tasks by list
+
+const listsView = interactDOM().hookDOMelement('listsView')
+
+listsView.addEventListener('click', e => {
+    if(e.target.classList.contains('list-item')){
+        console.log(e.target)
+        filterByList(e.target, lists, todos)
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ======================== filter tasks by list
