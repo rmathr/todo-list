@@ -21,7 +21,7 @@ export default function controlPriorityChange(element, index, todos){
              console.log(e.target.value);
              modifyPriority(index, `${e.target.value}`, todos)
             //  interactDOM().hide(changeStatus);
-            changePriority.remove()
+            // changePriority.remove()
              displayTasks(todos)  
         }
      })

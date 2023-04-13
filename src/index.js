@@ -6,13 +6,18 @@ import { modifyStatus } from "./todoCreator"
 import controlTaskChange from "./controlTaskChange"
 import controlStatusChange from "./controlStatusChange"
 import controlPriorityChange from "./controlPriorityChange"
-import controlListChange from "./controlListChange"
+import { controlListChange } from "./controlListChange"
+import { updateListOptions } from "./controlListChange"
 import { createList } from "./createList"
 import displayLists from "./displayLists"
 import handleNewListForm from "./handleNewListForm"
 import handleNewTaskForm from "./handleNewTaskForm"
 import filterByList from "./filterByList"
 import { createNewTask } from "./todoCreator"
+import { defineTaskId } from "./todoCreator"
+import handleFilterOrder from "./handleFilterOrder"
+
+import arrowRight  from './right.png'
 
 const todos = []
 const lists = []
@@ -70,8 +75,9 @@ const addTasks = function(){
     let list = interactDOM().getInputValue('listInput')
     let priority = interactDOM().getInputValue('priorityInput')
     let dueDate = interactDOM().getInputValue('dueDateInput')
-    const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
-    todos.push(todo)
+    // const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
+    const todo = createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`, todos)
+    // todos.push(todo)
     interactDOM().formReset('newTask')
 }
 
@@ -140,15 +146,15 @@ lists.push(list4)
 console.log(lists.map( list => list.listName))
 displayLists(lists)
 
-const listInput = interactDOM().hookDOMelement('listInput')
-const listArray = lists.map( list => list.listName)
-    listArray.forEach(item => {
-        const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
-        optionElement.value = item
-        optionElement.textContent = item
-        listInput.appendChild(optionElement)
-    })
-
+// const listInput = interactDOM().hookDOMelement('listInput')
+// const listArray = lists.map( list => list.listName)
+// listArray.forEach(item => {
+//         const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
+//         optionElement.value = item
+//         optionElement.textContent = item
+//         listInput.appendChild(optionElement)
+// })
+updateListOptions(lists)
 
 
 
@@ -175,6 +181,7 @@ addNewList.addEventListener('click', e =>{
     interactDOM().hide(newListForm)
     addList()
     displayLists(lists)
+    updateListOptions(lists)
 })
 
 // ======================= list add logic, soon will be a new module
@@ -197,22 +204,73 @@ listsView.addEventListener('click', e => {
     }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ======================== filter tasks by list
+
+const removeFilter = interactDOM().hookDOMelement('removeFilter')
+removeFilter.addEventListener('mousedown', e => {
+    e.preventDefault()
+    displayTasks(todos)
+})
+
+
+handleFilterOrder(lists, todos)
+
+console.log(todos)
+// const todosGeneralTitles = interactDOM().hookDOMelement('todosGeneralTitles')
+// todosGeneralTitles.addEventListener('click', e => {
+//     if(e.target.id != 'todosTasksTitle'){
+//         if(e.target.classList.contains('expand-icon')){
+//             console.log(e.target.getBoundingClientRect())
+//             const { top, left } = e.target.parentNode.getBoundingClientRect()
+//             const expandedMenu = interactDOM().createElementWithClassAndId('div', 'expanded-menu', 'expandedMenu')
+
+//             const options = ['Filter', 'Sort']
+//             options.forEach((option) => {
+//                 const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort', `filterSortId#${options.indexOf(option)}`)
+//                 const textElement = interactDOM().createElementWithClassAndId('p', 'filter-sort-text', `filterSortText#${options.indexOf(option)}`)
+//                 const rightArrow = interactDOM().createElementWithClassAndId('img', 'right-arrow', `rightArrow#${options.indexOf(option)}`)
+//                 rightArrow.src = arrowRight
+//                 textElement.textContent = option
+//                 optionElement.value = option;
+//                 // optionElement.textContent = option;
+//                 expandedMenu.appendChild(optionElement);
+//                 optionElement.appendChild(textElement);
+
+//                 optionElement.appendChild(rightArrow)
+//             });
+
+//             expandedMenu.style.position = 'absolute'
+//             expandedMenu.style.display = 'flex'
+//             expandedMenu.style.top = `${top + 25}px`;
+//             expandedMenu.style.left = `${left}px`;
+//             document.body.appendChild(expandedMenu);
+
+//             document.addEventListener('mousedown', e => {
+//                 if(!e.target.parentNode.classList.contains('filter-sort')){
+//                     console.log(e.target)
+//                     expandedMenu.remove()
+//                 }
+                
+
+//         })
+
+//             expandedMenu.addEventListener('mousedown', e => {
+//                 if(e.target.parentNode.classList.contains('filter-sort')){
+//                     console.log(e.target)
+//                 }
+//             })
+
+            
+
+           
+
+
+//         }
+        
+
+
+
+//     }
+    
+// })
+

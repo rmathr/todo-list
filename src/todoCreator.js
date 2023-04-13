@@ -11,6 +11,12 @@ const priorityChanger = props => ({
     }
 })
 
+function defineTaskId (todos) {
+    todos.forEach( todo => { 
+        todo.order = todos.indexOf(todo)
+    });
+}
+
 function modifyTask (index, taskValue, todos) {
     // const todo = createNewTask(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`, todos)
     // const todo = todoCreator(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
@@ -24,26 +30,26 @@ function modifyTask (index, taskValue, todos) {
 
 function modifyStatus (index, statusValue, todos) {
     // const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
-    
+    const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
-    todos[index].status = `${statusValue}`
+    todos[correctIndex].status = `${statusValue}`
 
     displayTasks(todos)
 }
 
 function modifyPriority (index, priorityValue, todos) {
     // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${todos[index].list}`, `${priorityValue}`, `${todos[index].dueDate}`)
-    
+    const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
-    todos[index].priority = `${priorityValue}`
+    todos[correctIndex].priority = `${priorityValue}`
     displayTasks(todos)
 }
 
 function modifyList (index, listValue, todos) {
     // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${listValue}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
-    
+    const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
-    todos[index].list = `${listValue}`
+    todos[correctIndex].list = `${listValue}`
     displayTasks(todos)
 }
 
@@ -67,4 +73,4 @@ const createNewTask = (task, status, list, priority, dueDate, todos) => {
     return todo
 } 
 
-export { modifyTask, modifyStatus, modifyPriority, modifyList, todoCreator, createNewTask}
+export { defineTaskId, modifyTask, modifyStatus, modifyPriority, modifyList, todoCreator, createNewTask}

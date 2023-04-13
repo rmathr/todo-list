@@ -19,7 +19,7 @@ body {
 }
 
 .sidebar{
-    width: 280px;
+    width: 220px;
     background-color: #121212;
     padding: 12px;
     display: flex;
@@ -87,7 +87,7 @@ body {
     /* display: flex;
     flex-direction: row; */
     display: grid;
-    grid-template-columns: 1fr 15fr 6fr 6fr 6fr 6fr 1fr;
+    grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr;
     grid-template-rows: 1.6rem;
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
 }
@@ -114,11 +114,28 @@ body {
     /* font-weight: 700; */
     /* width: 90%; */
     display: grid;
-    grid-template-columns: 16fr 6fr 6fr 6fr 7fr;
+    grid-template-columns: 16fr 7fr 7fr 7fr 8fr;;
     grid-template-rows: 1.6rem;
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
     text-transform: capitalize;
 }
+
+.todos-titles:not(:first-child){
+    display: flex;
+    flex-direction: row;
+}
+
+.expand-icon{
+    width: 22px;
+    height: auto;
+}
+
+
+.right-arrow{
+    width: 12px;
+    height: auto;
+}
+
 
 .delete-task{
     width: fit-content;
@@ -201,6 +218,7 @@ body {
     justify-content: space-between;
     padding: 12px;
     z-index: 1;
+    box-shadow: rgba(198, 188, 188, 0.56) 0px 22px 700px 4000px;
 }
 
 .add-list-form{
@@ -245,3 +263,47 @@ body {
 
     backdrop-filter: blur(100px);
 }
+
+
+
+
+.expanded-menu, .expanded-filter-menu, .expanded-sort-menu{
+    width: 150px;
+    /* height: 50px; */
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background-color: rgb(49 49 49);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px solid rgba(232, 232, 232, 0.1);
+    border-radius: 2px;
+}
+
+.expanded-menu button {
+    /* width: 70%; */
+    height: 25px;
+    color: #e8e8e8;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.expanded-filter-menu button, .expanded-sort-menu button {
+    height: 25px;
+    color: #e8e8e8;
+    background-color: transparent;
+    border: none;
+}
+
+.filter-sort-text{
+    /* width: 80%; */
+    flex-grow: 1;
+}
+
+.expanded-menu button:not(:first-child), .expanded-filter-menu button:not(:first-child), .expanded-sort-menu button:not(:first-child)  {
+    border-top: 1px solid rgba(232, 232, 232, 0.1)
+}
+
