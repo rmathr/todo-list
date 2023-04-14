@@ -5,8 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../src/tasks.png">
+    <link rel="stylesheet" href="../node_modules/wc-datepicker/dist/themes/dark.css" />
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
+
+    <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/wc-datepicker/dist/esm/wc-datepicker.js"
+  ></script>
+    
     <title>Todo!</title>
 </head>
 <body>
@@ -19,6 +26,7 @@
             <section class="lists-view" id="listsView">
             <p class="lists-view-title" id="listsViewTitle">Lists</p>
             </section>
+            <button class="remove-filter" id="removeFilter">Show all</button>
            <button class="new-list" id="newList">
             <p class="new-list-plus" id="newListPlus">+</p>
             <p class="new-list-text" id="newListText">New list</p>
@@ -26,12 +34,12 @@
         </section>
         <main class="main-content" id="mainContent">
             <section class="todos-view" id="todosView">
-                <div class="todos-general-titles">
-                    <p class="todos-titles" id="todosTasksTitle">tasks</p>
-                    <p class="todos-titles">status</p>
-                    <p class="todos-titles">list</p>
-                    <p class="todos-titles">priority</p>
-                    <p class="todos-titles">due date</p>
+                <div class="todos-general-titles" id="todosGeneralTitles">
+                    <p class="todos-titles" id="todosTitleTasks">tasks</p>
+                    <p class="todos-titles" id="todosTitleStatus">status <img src="../src/down.png" class="expand-icon" alt="" srcset=""></p>
+                    <p class="todos-titles" id="todosTitleLists">list <img src="../src/down.png" class="expand-icon" alt="" srcset=""></p>
+                    <p class="todos-titles" id="todosTitlePriorities">priority <img src="../src/down.png" class="expand-icon" alt="" srcset=""></p>
+                    <p class="todos-titles" id="todosTitleDueDates">due date <img src="../src/down.png" class="expand-icon" alt="" srcset=""></p>
                 </div>
             </section>
 
@@ -67,7 +75,7 @@
                 </form>
             </section>
             
-
+            <!-- <wc-datepicker></wc-datepicker> -->
 
         </main>
     </div>
