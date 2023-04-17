@@ -19,6 +19,11 @@ import handleFilterOrder from "./handleFilterOrder"
 
 import arrowRight  from './right.png'
 
+import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker";
+// import "../node_modules/wc-datepicker/dist/themes/dark.css"
+
+
+
 const todos = []
 const lists = []
 
@@ -216,61 +221,83 @@ removeFilter.addEventListener('mousedown', e => {
 handleFilterOrder(lists, todos)
 
 console.log(todos)
-// const todosGeneralTitles = interactDOM().hookDOMelement('todosGeneralTitles')
-// todosGeneralTitles.addEventListener('click', e => {
-//     if(e.target.id != 'todosTasksTitle'){
-//         if(e.target.classList.contains('expand-icon')){
-//             console.log(e.target.getBoundingClientRect())
-//             const { top, left } = e.target.parentNode.getBoundingClientRect()
-//             const expandedMenu = interactDOM().createElementWithClassAndId('div', 'expanded-menu', 'expandedMenu')
-
-//             const options = ['Filter', 'Sort']
-//             options.forEach((option) => {
-//                 const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort', `filterSortId#${options.indexOf(option)}`)
-//                 const textElement = interactDOM().createElementWithClassAndId('p', 'filter-sort-text', `filterSortText#${options.indexOf(option)}`)
-//                 const rightArrow = interactDOM().createElementWithClassAndId('img', 'right-arrow', `rightArrow#${options.indexOf(option)}`)
-//                 rightArrow.src = arrowRight
-//                 textElement.textContent = option
-//                 optionElement.value = option;
-//                 // optionElement.textContent = option;
-//                 expandedMenu.appendChild(optionElement);
-//                 optionElement.appendChild(textElement);
-
-//                 optionElement.appendChild(rightArrow)
-//             });
-
-//             expandedMenu.style.position = 'absolute'
-//             expandedMenu.style.display = 'flex'
-//             expandedMenu.style.top = `${top + 25}px`;
-//             expandedMenu.style.left = `${left}px`;
-//             document.body.appendChild(expandedMenu);
-
-//             document.addEventListener('mousedown', e => {
-//                 if(!e.target.parentNode.classList.contains('filter-sort')){
-//                     console.log(e.target)
-//                     expandedMenu.remove()
-//                 }
-                
-
-//         })
-
-//             expandedMenu.addEventListener('mousedown', e => {
-//                 if(e.target.parentNode.classList.contains('filter-sort')){
-//                     console.log(e.target)
-//                 }
-//             })
-
-            
-
-           
-
-
-//         }
-        
 
 
 
-//     }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//============================================================
+// import { easepick } from "@easepick/bundle"
+// import { AmpPlugin } from '@easepick/amp-plugin';
+// const mainContent = interactDOM().hookDOMelement('mainContent')
+// // import controlDatePicker from "./datepicker"
+
+
+// const datepicker = interactDOM().createElementWithClassAndId('input', 'date-picker', 'datepicker')  
+// mainContent.appendChild(datepicker)
+// const picker = new easepick.create({
+//     element: document.getElementById('datepicker'),
+//     css: [
+//         "https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css",
+//         "./main.css"
+//         // 'https://easepick.com/css/customize_sample.css',
+//         // "../src/calendar.css"
+//         // "./calendar.css"
+//     ],
+//     zIndex: 10,
+//     firstDay: 0,
+//     inline: true,
+//     AmpPlugin: {
+//         dropdown: {
+//             months: true,
+//             years: true,
+//             minYear: 2000,
+//             maxYear: 2030
+//         },
+//         darkMode: false
+//     },
+//     plugins: [AmpPlugin]
 // })
 
+//==========================================================

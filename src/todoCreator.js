@@ -22,8 +22,8 @@ function modifyTask (index, taskValue, todos) {
     // const todo = todoCreator(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     
     // todos.splice(index, 1, todo)
-
-    todos[index].task = `${taskValue}`
+    const correctIndex = todos.findIndex(item => item.order == index)
+    todos[correctIndex].task = `${taskValue}`
     displayTasks(todos)
 }
 

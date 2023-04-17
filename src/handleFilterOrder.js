@@ -4,9 +4,21 @@ import filterByList from "./filterByList"
 import filterByStatus from "./filterByStatus"
 import filterByPriority from "./filterByPriority"
 import sortByTitle from "./sortByTitle"
+import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker"
+import "wc-datepicker/dist/themes/dark.css";
+
+customElements.define("wc-datepicker", WcDatepicker);
 
 
-
+function populateFilter (parentElement, array){
+    array.forEach((option) => {
+        const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort-expanded', `filterSortExpandedId#${array.indexOf(option)}`)
+        optionElement.textContent = option
+        optionElement.value = option;
+        // optionElement.textContent = option;
+        parentElement.appendChild(optionElement);
+    });
+}
 
 
 export default function handleFilterOrder (lists, todos){
@@ -63,31 +75,50 @@ export default function handleFilterOrder (lists, todos){
                                 case 'Status':
                                     options = ['to-do', 'doing', 'done', 'wont do']
                                     console.log(options)
+                                    populateFilter (expandedFilterMenu, options)
                                     break
                                 case 'Lists':
                                     options = lists.map( list => list.listName)
                                     console.log(options)
+                                    populateFilter (expandedFilterMenu, options)
                                     break
                                 case 'Priorities':
                                     options = ['low', 'medium', 'high']
                                     console.log(options)
+                                    populateFilter (expandedFilterMenu, options)
+                                    break
+                                case 'DueDates':
+                                expandedFilterMenu.classList.add('filter-dueDate')
+                                const datePicker = interactDOM().createElementWithClassAndId('wc-datepicker', 'date-picker', 'datepicker')
+                                expandedFilterMenu.appendChild(datePicker)
+                               
+
+                                
+
+                                
                                     break
                                 default:
                                     options = []
                                     break;
                             }
-                            options.forEach((option) => {
-                                const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort-expanded', `filterSortExpandedId#${options.indexOf(option)}`)
-                                optionElement.textContent = option
-                                optionElement.value = option;
-                                // optionElement.textContent = option;
-                                expandedFilterMenu.appendChild(optionElement);
-                            });
+                            
+                            // options.forEach((option) => {
+                            //     const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort-expanded', `filterSortExpandedId#${options.indexOf(option)}`)
+                            //     optionElement.textContent = option
+                            //     optionElement.value = option;
+                            //     // optionElement.textContent = option;
+                            //     expandedFilterMenu.appendChild(optionElement);
+                            // });
 
                             expandedFilterMenu.style.position = 'absolute'
                             expandedFilterMenu.style.display = 'flex'
                             expandedFilterMenu.style.top = `${top + 26}px`;
-                            expandedFilterMenu.style.left = `${right + 1}px`;
+                            if(todoTitle == 'DueDates'){
+                                console.log(e.target.parentNode.getBoundingClientRect())
+                                expandedFilterMenu.style.left = `${right - 420}px`;
+                            } else {
+                                expandedFilterMenu.style.left = `${right + 1}px`;
+                            }
                             document.body.appendChild(expandedFilterMenu);
 
                             document.addEventListener('mousedown', e => {
@@ -97,6 +128,7 @@ export default function handleFilterOrder (lists, todos){
                             )
      
                             expandedFilterMenu.addEventListener('mousedown', e =>{
+                                e.stopPropagation()
                                 if (e.target.parentNode.classList.contains('expanded-filter-menu')) {
                                     console.log(e.target.value)
                                     console.log(todoTitle)
@@ -110,6 +142,13 @@ export default function handleFilterOrder (lists, todos){
                                             break
                                         case 'Priorities':
                                             filterByPriority(e.target, todos)
+                                            break
+                                        case 'DueDates':
+                                            console.log('teste')
+                                            const datepicker = interactDOM().hookDOMelement('datepicker')
+                                            datepicker.addEventListener('selectDate', function(event) {
+                                                console.log(event.detail);
+                                              });
                                             break
                                         default:
                                             break;

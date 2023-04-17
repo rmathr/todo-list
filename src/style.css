@@ -269,6 +269,7 @@ body {
 
 .expanded-menu, .expanded-filter-menu, .expanded-sort-menu{
     width: 150px;
+    /* width: fit-content; */
     /* height: 50px; */
     display: flex;
     flex-direction: column;
@@ -289,6 +290,9 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    /* display: grid;
+    grid-template-columns: auto 12px;
+    grid-template-rows: auto; */
 }
 
 .expanded-filter-menu button, .expanded-sort-menu button {
@@ -299,11 +303,28 @@ body {
 }
 
 .filter-sort-text{
-    /* width: 80%; */
+    
     flex-grow: 1;
+    /* height: 25px; */
+
 }
 
 .expanded-menu button:not(:first-child), .expanded-filter-menu button:not(:first-child), .expanded-sort-menu button:not(:first-child)  {
     border-top: 1px solid rgba(232, 232, 232, 0.1)
 }
 
+.expanded-filter-menu, .expanded-sort-menu{
+    width: fit-content;
+}
+
+.filter-dueDate{
+    transform: scale(0.8);
+}
+/* calendar widget */
+
+
+.date-picker.sc-wc-datepicker-h.sc-wc-datepicker-s{
+    
+    border: 1px solid #e8e8e8;
+}
+/* calendar widget */

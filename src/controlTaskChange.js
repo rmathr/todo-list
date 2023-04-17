@@ -5,10 +5,11 @@ import { modifyTask}  from "./todoCreator";
 export default function controlTaskChange(element, index, todos){
     
     // const buttons = ['low', 'medium', 'high'];
+    const correctIndex = todos.findIndex(item => item.order == index)
     const { top, left } = element.getBoundingClientRect()
     const changeTask = interactDOM().createElementWithClassAndId('input', 'change-task-input', 'changeTaskInput')
     changeTask.type = 'text'
-    const taskValue = `${todos[index].task}`
+    const taskValue = `${todos[correctIndex].task}`
     changeTask.value = taskValue
     
     changeTask.style.position = 'absolute'
