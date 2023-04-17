@@ -55,7 +55,7 @@ const interactDOM = function(){
         status.textContent = `${obj.status}`
         list.textContent = `${obj.list}`
         priority.textContent = `${obj.priority}`
-        dueDate.textContent = `${format(new Date(obj.dueDate), "MMM d',' yy")}`
+        dueDate.textContent = `${format(new Date(obj.dueDate.replaceAll('-', '/')), "MMM dd',' yy")}`
     }
 
     const appendListElementandDefineContent = function(container, obj, index){

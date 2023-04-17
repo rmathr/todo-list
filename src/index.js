@@ -35,16 +35,17 @@ const deleteTask = index => {
 }
 
 
-const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '03/04/2023', todos)
-const todo2 = createNewTask('play Ravendawn', 'to-do', 'daily', 'high', '03/04/2023', todos)
-const todo3 = createNewTask('study math', 'to-do', 'daily', 'medium', '06/04/2023', todos)
-const todo4 = createNewTask('play guitar', 'doing', 'general', 'low', '09/04/2023', todos)
-const todo5 = createNewTask('look for beavers', 'to-do', 'general', 'high', '12/04/2023', todos)
-const todo6 = createNewTask('try to catch a squirrel', 'to-do', 'general', 'low', '06/12/2023', todos)
-const todo7 = createNewTask('watch tv', 'doing', 'Nemo', 'medium', '11/04/2022', todos)
-const todo8 = createNewTask('take a shower', 'to-do', 'Project', 'high', '12/31/2024', todos)
-const todo9 = createNewTask('born', 'done', 'Nemo', 'high', '01/04/1993', todos)
-const todo10 = createNewTask('graduate at fanshawe', 'wont do', 'Project', 'medium', '02/04/2024', todos)
+const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '2023-04-03', todos)
+// const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '04/03/2023', todos)
+const todo2 = createNewTask('play Ravendawn', 'to-do', 'daily', 'high', '2023-04-03', todos)
+const todo3 = createNewTask('study math', 'to-do', 'daily', 'medium', '2023-06-04', todos)
+const todo4 = createNewTask('play guitar', 'doing', 'general', 'low', '2023-07-02', todos)
+const todo5 = createNewTask('look for beavers', 'to-do', 'general', 'high', '2023-04-12', todos)
+const todo6 = createNewTask('try to catch a squirrel', 'to-do', 'general', 'low', '2023-12-06', todos)
+const todo7 = createNewTask('watch tv', 'doing', 'Nemo', 'medium', '2022-05-05', todos)
+const todo8 = createNewTask('take a shower', 'to-do', 'Project', 'high', '2024-05-17', todos)
+const todo9 = createNewTask('born', 'done', 'Nemo', 'high', '1993-01-04', todos)
+const todo10 = createNewTask('graduate at fanshawe', 'wont do', 'Project', 'medium', '2023-12-11', todos)
 
 // todos.push(todo1)
 // todos.push(todo2)
@@ -82,6 +83,7 @@ const addTasks = function(){
     let dueDate = interactDOM().getInputValue('dueDateInput')
     // const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
     const todo = createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`, todos)
+    console.log(dueDate)
     // todos.push(todo)
     interactDOM().formReset('newTask')
 }

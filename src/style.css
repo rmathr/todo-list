@@ -120,7 +120,7 @@ body {
     text-transform: capitalize;
 }
 
-.todos-titles:not(:first-child){
+.todos-titles{
     display: flex;
     flex-direction: row;
 }
@@ -314,7 +314,8 @@ body {
 }
 
 .expanded-filter-menu, .expanded-sort-menu{
-    width: fit-content;
+    min-width: fit-content;
+    width: 150px;
 }
 
 .filter-dueDate{

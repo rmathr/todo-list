@@ -3,9 +3,11 @@ import arrowRight  from './right.png'
 import filterByList from "./filterByList"
 import filterByStatus from "./filterByStatus"
 import filterByPriority from "./filterByPriority"
+import filterByDate from "./filterByDate"
 import sortByTitle from "./sortByTitle"
 import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker"
 import "wc-datepicker/dist/themes/dark.css";
+import downIcon from "./down.png"
 
 customElements.define("wc-datepicker", WcDatepicker);
 
@@ -20,11 +22,23 @@ function populateFilter (parentElement, array){
     });
 }
 
+function inputElementIcons(parentElement, icon){
+    const image = interactDOM().createElementWithClassAndId('img', 'expand-icon', `${parentElement}-icon` )
+    image.src = icon
+    interactDOM().hookDOMelement(parentElement).appendChild(image)
+}
+
+inputElementIcons('todosTitleTasks', downIcon)
+inputElementIcons('todosTitleStatus', downIcon)
+inputElementIcons('todosTitleLists', downIcon)
+inputElementIcons('todosTitlePriorities', downIcon)
+inputElementIcons('todosTitleDueDates', downIcon)
+
 
 export default function handleFilterOrder (lists, todos){
     const todosGeneralTitles = interactDOM().hookDOMelement('todosGeneralTitles')
     todosGeneralTitles.addEventListener('click', e => {
-        if(e.target.id != 'todosTasksTitle'){
+        
             if(e.target.classList.contains('expand-icon')){
                 const currentGeneralTitle = e.target.parentNode
                 // console.log(currentGeneralTitle)
@@ -32,7 +46,7 @@ export default function handleFilterOrder (lists, todos){
                 let { top, left } = e.target.parentNode.getBoundingClientRect()
                 const expandedMenu = interactDOM().createElementWithClassAndId('div', 'expanded-menu', 'expandedMenu')
     
-                const options = ['Filter', 'Sort']
+                const options = currentGeneralTitle.id == 'todosTitleTasks' ? ['Sort'] : ['Filter', 'Sort']
                 options.forEach((option) => {
                     const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort', `filterSortId#${options.indexOf(option)}`)
                     const textElement = interactDOM().createElementWithClassAndId('p', 'filter-sort-text', `filterSortText#${options.indexOf(option)}`)
@@ -129,12 +143,14 @@ export default function handleFilterOrder (lists, todos){
      
                             expandedFilterMenu.addEventListener('mousedown', e =>{
                                 e.stopPropagation()
-                                if (e.target.parentNode.classList.contains('expanded-filter-menu')) {
+                                if (e.target.parentNode.classList.contains('expanded-filter-menu') || e.target.parentNode.classList.contains('wc-datepicker__date'))  {
                                     console.log(e.target.value)
                                     console.log(todoTitle)
                                     switch (todoTitle) {
                                         case 'Status':
                                             filterByStatus(e.target, todos)
+                                            expandedMenu.remove()
+                                            expandedFilterMenu.remove()
                                             break
                                         case 'Lists':
                                             // console.log(e.target)    
@@ -144,10 +160,14 @@ export default function handleFilterOrder (lists, todos){
                                             filterByPriority(e.target, todos)
                                             break
                                         case 'DueDates':
-                                            console.log('teste')
+                                            // console.log('teste')
                                             const datepicker = interactDOM().hookDOMelement('datepicker')
                                             datepicker.addEventListener('selectDate', function(event) {
-                                                console.log(event.detail);
+                                                const datepicked = event.detail
+                                                console.log(datepicked == todos[0].dueDate);
+                                                filterByDate(datepicked, todos)
+                                                expandedMenu.remove()
+                                                expandedFilterMenu.remove()
                                               });
                                             break
                                         default:
@@ -162,7 +182,7 @@ export default function handleFilterOrder (lists, todos){
                             const { right, top } = e.target.parentNode.getBoundingClientRect()
                             const expandedSortMenu = interactDOM().createElementWithClassAndId('div', 'expanded-sort-menu', "expandedSortMenu")
                             let todoTitle = currentGeneralTitle.id.slice(10)
-                            const options = ['Alphabetical', 'Reverse alphabetical']
+                            const options = todoTitle == 'DueDates' ? ['Newest to oldest', 'Oldest to newest'] : ['Alphabetical', 'Reverse alphabetical']
                             
                             options.forEach((option) => {
                                 const optionElement = interactDOM().createElementWithClassAndId('button', 'filter-sort-expanded', `filterSortExpandedId#${options.indexOf(option)}`)
@@ -175,7 +195,15 @@ export default function handleFilterOrder (lists, todos){
                             expandedSortMenu.style.position = 'absolute'
                             expandedSortMenu.style.display = 'flex'
                             expandedSortMenu.style.top = `${top}px`;
-                            expandedSortMenu.style.left = `${right + 1}px`;
+                            // expandedSortMenu.style.left = `${right + 1}px`;
+                            if(todoTitle == 'DueDates'){
+                                console.log(e.target.parentNode.getBoundingClientRect())
+                                expandedSortMenu.style.left = `${right - 301}px`;
+                            } else {
+                                expandedSortMenu.style.left = `${right + 1}px`;
+                            }
+
+
                             document.body.appendChild(expandedSortMenu);
 
                             document.addEventListener('mousedown', e => {
@@ -195,15 +223,18 @@ export default function handleFilterOrder (lists, todos){
                                         case 'Priorities':
                                             sortByTitle(e.target, todos, 'priority')
                                             break
+                                        case 'DueDates':
+                                            console.log(e.target)
+                                            sortByTitle(e.target, todos, 'dueDate')
+                                            break
+                                        case 'Tasks':
+                                            sortByTitle(e.target, todos, 'task')
+                                            break;
                                         default:
                                             break;
                                     }
                                 }
                             })
-
-                            
-                            // const sortedArray = todos.sort((a,b) => a.status > b.status ? 1 : -1) //crescent
-                            // console.log(e.target.getBoundingClientRect())
                         }
                     }
                 })
@@ -217,7 +248,7 @@ export default function handleFilterOrder (lists, todos){
     
     
     
-        }
+        
         
     })
     
