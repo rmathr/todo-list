@@ -53,6 +53,13 @@ function modifyList (index, listValue, todos) {
     displayTasks(todos)
 }
 
+
+function modifyDueDate (index, dueDateValue, todos){
+    const correctIndex = todos.findIndex(item => item.order == index)
+    todos[correctIndex].dueDate = `${dueDateValue}`
+    displayTasks(todos)
+}
+
 function todoCreator(task, status, list, priority, dueDate){
     let todo = {
         task,
@@ -73,4 +80,4 @@ const createNewTask = (task, status, list, priority, dueDate, todos) => {
     return todo
 } 
 
-export { defineTaskId, modifyTask, modifyStatus, modifyPriority, modifyList, todoCreator, createNewTask}
+export { defineTaskId, modifyTask, modifyStatus, modifyPriority, modifyList, modifyDueDate, todoCreator, createNewTask}

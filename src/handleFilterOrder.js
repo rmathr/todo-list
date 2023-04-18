@@ -155,9 +155,13 @@ export default function handleFilterOrder (lists, todos){
                                         case 'Lists':
                                             // console.log(e.target)    
                                             filterByList(e.target, lists, todos)
+                                            expandedMenu.remove()
+                                            expandedFilterMenu.remove()
                                             break
                                         case 'Priorities':
                                             filterByPriority(e.target, todos)
+                                            expandedMenu.remove()
+                                            expandedFilterMenu.remove()
                                             break
                                         case 'DueDates':
                                             // console.log('teste')
@@ -170,9 +174,8 @@ export default function handleFilterOrder (lists, todos){
                                                 expandedFilterMenu.remove()
                                               });
                                             break
-                                        default:
-                                            break;
                                     }
+                                   
                                 }
                             })
                             

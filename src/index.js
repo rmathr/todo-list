@@ -6,6 +6,7 @@ import { modifyStatus } from "./todoCreator"
 import controlTaskChange from "./controlTaskChange"
 import controlStatusChange from "./controlStatusChange"
 import controlPriorityChange from "./controlPriorityChange"
+import controlDueDateChange from "./controlDueDateChange"
 import { controlListChange } from "./controlListChange"
 import { updateListOptions } from "./controlListChange"
 import { createList } from "./createList"
@@ -124,6 +125,9 @@ todosView.addEventListener('click', (e) => {
     } else if(e.target.classList.contains('todo-tasks')){
         const index = +`${e.target.id}`.replace("task", "")
         controlTaskChange(e.target, index, todos)
+    } else if(e.target.classList.contains('todo-due-date')){
+        const index = +`${e.target.id}`.replace("dueDate", "")
+        controlDueDateChange(e.target, index, todos)
     }
     
     // else {
