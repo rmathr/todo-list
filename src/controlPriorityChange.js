@@ -1,9 +1,10 @@
 import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyPriority }  from "./todoCreator";
+import { getFromLocalStorage } from "./handleSaveLogic";
 
-export default function controlPriorityChange(element, index, todos){
-    
+export default function controlPriorityChange(element, index){
+    let todos = getFromLocalStorage()
     const buttons = ['low', 'medium', 'high'];
     const { top, left } = element.getBoundingClientRect()
     const changePriority = interactDOM().generateListOptions({top, left}, buttons, 'priority')
@@ -19,10 +20,10 @@ export default function controlPriorityChange(element, index, todos){
     changePriority.addEventListener('mousedown', e =>{
         if (e.target.classList.contains('change-priority-button')){
              console.log(e.target.value);
-             modifyPriority(index, `${e.target.value}`, todos)
+             modifyPriority(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
             // changePriority.remove()
-             displayTasks(todos)  
+            //  displayTasks(todos)  
         }
      })
 }

@@ -1,9 +1,10 @@
 import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyStatus }  from "./todoCreator";
+import { getFromLocalStorage } from "./handleSaveLogic";
 
-export default function controlStatusChange(element, index, todos){
-    
+export default function controlStatusChange(element, index){
+    let todos = getFromLocalStorage()
     const buttons = ['to-do', 'doing', 'done', 'wont do'];
     const { top, left } = element.getBoundingClientRect()
 
@@ -37,10 +38,10 @@ export default function controlStatusChange(element, index, todos){
     changeStatus.addEventListener('mousedown', e =>{
         if (e.target.classList.contains('change-status-button')){
              console.log(e.target.value);
-             modifyStatus(index, `${e.target.value}`, todos)
+             modifyStatus(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
             changeStatus.remove()
-             displayTasks(todos)  
+            //  displayTasks(todos)  
         }
      })
 }

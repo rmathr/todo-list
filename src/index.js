@@ -19,6 +19,7 @@ import { defineTaskId } from "./todoCreator"
 import handleFilterOrder from "./handleFilterOrder"
 import handleSaveLogic from "./handleSaveLogic"
 import { deleteTask } from "./todoCreator"
+import { getFromLocalStorage } from "./handleSaveLogic"
 
 import arrowRight  from './right.png'
 
@@ -28,23 +29,23 @@ import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker";
 
 // const todos = JSON.parse(localStorage.getItem('todos') || '[]')
 // const todos = []
-let todos = []
+let todos = getFromLocalStorage() || []
 const lists = []
 
 
 
 
-function getFromLocalStorage() {
-    const reference = localStorage.getItem('todos');
-    // if reference exists
-    if (reference) {
-      // converts back to array and store it in todos array
-      todos = JSON.parse(reference);
-      displayTasks(todos)
+// function getFromLocalStorage() {
+//     const reference = localStorage.getItem('todos');
+//     // if reference exists
+//     if (reference) {
+//       // converts back to array and store it in todos array
+//       todos = JSON.parse(reference);
       
-    }
-  }
-  getFromLocalStorage()
+//     }
+// }
+
+displayTasks(todos)
 
 // const deleteTask = index => {
 //     todos.splice(index, 1)

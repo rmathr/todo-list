@@ -1,9 +1,11 @@
 import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyTask}  from "./todoCreator";
+import { addToLocalStorage } from "./handleSaveLogic";
+import { getFromLocalStorage } from "./handleSaveLogic";
 
-export default function controlTaskChange(element, index, todos){
-    
+export default function controlTaskChange(element, index){
+    let todos = getFromLocalStorage()
     // const buttons = ['low', 'medium', 'high'];
     const correctIndex = todos.findIndex(item => item.order == index)
     const { top, left } = element.getBoundingClientRect()
@@ -20,17 +22,17 @@ export default function controlTaskChange(element, index, todos){
     
     document.addEventListener('mousedown', e =>{
         if(!e.target.classList.contains('change-task-input') && document.contains(changeTask)){
-            modifyTask(index, `${changeTask.value}`, todos)
+            modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
-            displayTasks(todos)
+            // displayTasks(todos)
         }
     })
     
     changeTask.addEventListener('keydown', e => {
         if(e.keyCode == 13){
-            modifyTask(index, `${changeTask.value}`, todos)
+            modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
-            displayTasks(todos) 
+            // displayTasks(todos) 
         }
     })
 

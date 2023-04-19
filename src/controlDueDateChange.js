@@ -5,9 +5,10 @@ import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker"
 import "wc-datepicker/dist/themes/dark.css";
 import { eachWeekOfInterval } from "date-fns";
 // customElements.define("wc-datepicker", WcDatepicker);
+import { getFromLocalStorage } from "./handleSaveLogic";
 
-export default function controlDueDateChange(element, index, todos){
-    
+export default function controlDueDateChange(element, index){
+    let todos = getFromLocalStorage()
     // const buttons = ['low', 'medium', 'high'];
     const correctIndex = todos.findIndex(item => item.order == index)
     const { top, left } = element.getBoundingClientRect()
@@ -33,9 +34,9 @@ export default function controlDueDateChange(element, index, todos){
         datePicker.addEventListener('selectDate', function(event) {
             console.log(event)
             const datepicked = event.detail
-            modifyDueDate(index, datepicked, todos)
+            modifyDueDate(index, datepicked)
             datePicker.remove()
-            displayTasks(todos)
+            // displayTasks(todos)
             console.log(todos)
         });
     }

@@ -24,31 +24,36 @@ function defineTaskId (todos) {
     });
 }
 
-function modifyTask (index, taskValue, todos) {
+function modifyTask (index, taskValue) {
+    let todos = getFromLocalStorage()
     // const todo = createNewTask(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`, todos)
     // const todo = todoCreator(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     
     // todos.splice(index, 1, todo)
     const correctIndex = todos.findIndex(item => item.order == index)
     todos[correctIndex].task = `${taskValue}`
+    addToLocalStorage(todos)
     displayTasks(todos)
 }
 
 
-function modifyStatus (index, statusValue, todos) {
+function modifyStatus (index, statusValue) {
+    let todos = getFromLocalStorage()
     // const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
     todos[correctIndex].status = `${statusValue}`
-
+    addToLocalStorage(todos)
     displayTasks(todos)
 }
 
-function modifyPriority (index, priorityValue, todos) {
+function modifyPriority (index, priorityValue) {
+    let todos = getFromLocalStorage()
     // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${todos[index].list}`, `${priorityValue}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
     todos[correctIndex].priority = `${priorityValue}`
+    addToLocalStorage(todos)
     displayTasks(todos)
 }
 
@@ -61,9 +66,11 @@ function modifyList (index, listValue, todos) {
 }
 
 
-function modifyDueDate (index, dueDateValue, todos){
+function modifyDueDate (index, dueDateValue){
+    let todos = getFromLocalStorage()
     const correctIndex = todos.findIndex(item => item.order == index)
     todos[correctIndex].dueDate = `${dueDateValue}`
+    addToLocalStorage(todos)
     displayTasks(todos)
 }
 
