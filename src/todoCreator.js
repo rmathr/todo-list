@@ -1,15 +1,22 @@
 import displayTasks from "./displayTasks"
+import { getFromLocalStorage } from "./handleSaveLogic";
+import { addToLocalStorage } from "./handleSaveLogic";
 
-const statusChanger = props => ({
-    changeStatus: () => {
-        props.status = "OK"
-    }
-})
-const priorityChanger = props => ({
-    changePriority: () => {
-        props.priority = "LOW"
-    }
-})
+// function addToLocalStorage(todos) {
+//     // conver the array to string then store it.
+//     localStorage.setItem('todos', JSON.stringify(todos));
+   
+//     displayTasks(todos);
+//   }
+
+
+const deleteTask = (index) => {
+    let todos = getFromLocalStorage()
+    todos.splice(index, 1)
+    addToLocalStorage(todos)
+    displayTasks(todos)
+}
+
 
 function defineTaskId (todos) {
     todos.forEach( todo => { 
@@ -70,14 +77,23 @@ function todoCreator(task, status, list, priority, dueDate){
         order: null
     }
 
-    return Object.assign(todo, statusChanger(todo), priorityChanger(todo))
+    return Object.assign(todo)
 }
 
 const createNewTask = (task, status, list, priority, dueDate, todos) => {
     const todo = todoCreator(task, status, list, priority, dueDate)
+    // const newTodos = todos
     todos.push(todo)
     todo.order = todos.indexOf(todo)
+    addToLocalStorage(todos)
+    // const tempObj = newTodos[newTodos.indexOf(todo)]
+    // console.log(tempObj)
+    // const tempTodos = JSON.parse(localStorage.getItem('todos') || '[]')
+    
+    // if(tempTodos.indexOf(tempObj) == -1){
+    //     localStorage.setItem('todos', JSON.stringify(newTodos))
+    // }
     return todo
 } 
 
-export { defineTaskId, modifyTask, modifyStatus, modifyPriority, modifyList, modifyDueDate, todoCreator, createNewTask}
+export { defineTaskId, deleteTask, modifyTask, modifyStatus, modifyPriority, modifyList, modifyDueDate, todoCreator, createNewTask }

@@ -14,49 +14,18 @@ export default function controlDueDateChange(element, index, todos){
 
     
     const datePicker = interactDOM().createElementWithClassAndId('wc-datepicker', 'date-picker', 'datepicker')
-    datePicker.classList.add('edit-due-date') 
-    // datePicker.setAttribute('start-date', '2024-01-04')
+    datePicker.classList.add('edit-due-date')
+    const currentDate = todos[correctIndex].dueDate 
+    datePicker.setAttribute('start-date', `${currentDate}`)
     // datePicker.setAttribute('value', `${Date('2024-01-04')}`)
-    
+    datePicker.value = new Date(`${currentDate.replaceAll('-', '/')}`)
 
     datePicker.style.position = 'absolute'
     datePicker.style.display = 'flex'
     datePicker.style.top = `${top}px`;
     datePicker.style.left = `${left}px`; 
     document.body.appendChild(datePicker);
-    // document.addEventListener('mousedown', e =>{
-    //     // e.stopPropagation()
-    //     if(e.target.parentNode.classList.contains('wc-datepicker__date') && document.contains(datePicker)){
-    //         datePicker.addEventListener('selectDate', function(event) {
-    //             const datepicked = event.detail
-    //             modifyDueDate(index, datepicked, todos)
-    //             datePicker.remove()
-    //             displayTasks(todos)
-    //             console.log(todos)
-    //           });
-           
-            
-    //     }
-    // })
-    // document.addEventListener('mousedown', e => {
-    //     if(!e.target.parentNode.classList.contains('wc-datepicker__calendar-row') 
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__date'))
-    //      || (!e.target.parentNode.classList.contains('sc-wc-datepicker'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__weekday-row'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__calendar-header'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__calendar'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__body'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__previous-month-button'))
-    //      || (!e.target.parentNode.classList.contains('c-datepicker__next-month-button'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__current-month'))
-    //      || (!e.target.parentNode.classList.contains('wc-datepicker__current-month'))
-    //      || (!e.target.classList.contains('sc-wc-datepicker'))
-    //      || (!e.target.classList.contains('wc-datepicker__year-select'))
-    //     ){
-    //         datePicker.remove()
-    //     }
-    // })
-
+    
     document.addEventListener('mousedown', e =>{
            datePicker.remove()
     })

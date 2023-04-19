@@ -17,6 +17,8 @@ import filterByList from "./filterByList"
 import { createNewTask } from "./todoCreator"
 import { defineTaskId } from "./todoCreator"
 import handleFilterOrder from "./handleFilterOrder"
+import handleSaveLogic from "./handleSaveLogic"
+import { deleteTask } from "./todoCreator"
 
 import arrowRight  from './right.png'
 
@@ -24,29 +26,44 @@ import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker";
 // import "../node_modules/wc-datepicker/dist/themes/dark.css"
 
 
-
-const todos = []
+// const todos = JSON.parse(localStorage.getItem('todos') || '[]')
+// const todos = []
+let todos = []
 const lists = []
 
 
 
-const deleteTask = index => {
-    todos.splice(index, 1)
-    displayTasks(todos)
-}
+
+function getFromLocalStorage() {
+    const reference = localStorage.getItem('todos');
+    // if reference exists
+    if (reference) {
+      // converts back to array and store it in todos array
+      todos = JSON.parse(reference);
+      displayTasks(todos)
+      
+    }
+  }
+  getFromLocalStorage()
+
+// const deleteTask = index => {
+//     todos.splice(index, 1)
+//     displayTasks(todos)
+// }
 
 
-const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '2023-04-03', todos)
 // const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '04/03/2023', todos)
-const todo2 = createNewTask('play Ravendawn', 'to-do', 'daily', 'high', '2023-04-03', todos)
-const todo3 = createNewTask('study math', 'to-do', 'daily', 'medium', '2023-06-04', todos)
-const todo4 = createNewTask('play guitar', 'doing', 'general', 'low', '2023-07-02', todos)
-const todo5 = createNewTask('look for beavers', 'to-do', 'general', 'high', '2023-04-12', todos)
-const todo6 = createNewTask('try to catch a squirrel', 'to-do', 'general', 'low', '2023-12-06', todos)
-const todo7 = createNewTask('watch tv', 'doing', 'Nemo', 'medium', '2022-05-05', todos)
-const todo8 = createNewTask('take a shower', 'to-do', 'Project', 'high', '2024-05-17', todos)
-const todo9 = createNewTask('born', 'done', 'Nemo', 'high', '1993-01-04', todos)
-const todo10 = createNewTask('graduate at fanshawe', 'wont do', 'Project', 'medium', '2023-12-11', todos)
+
+// const todo1 = createNewTask('walk with Manchinha', 'to-do', 'daily', 'high', '2023-04-03', todos)
+// const todo2 = createNewTask('play Ravendawn', 'to-do', 'daily', 'high', '2023-04-03', todos)
+// const todo3 = createNewTask('study math', 'to-do', 'daily', 'medium', '2023-06-04', todos)
+// const todo4 = createNewTask('play guitar', 'doing', 'general', 'low', '2023-07-02', todos)
+// const todo5 = createNewTask('look for beavers', 'to-do', 'general', 'high', '2023-04-12', todos)
+// const todo6 = createNewTask('try to catch a squirrel', 'to-do', 'general', 'low', '2023-12-06', todos)
+// const todo7 = createNewTask('watch tv', 'doing', 'Nemo', 'medium', '2022-05-05', todos)
+// const todo8 = createNewTask('take a shower', 'to-do', 'Project', 'high', '2024-05-17', todos)
+// const todo9 = createNewTask('born', 'done', 'Nemo', 'high', '1993-01-04', todos)
+// const todo10 = createNewTask('graduate at fanshawe', 'wont do', 'Project', 'medium', '2023-12-11', todos)
 
 // todos.push(todo1)
 // todos.push(todo2)
@@ -89,7 +106,7 @@ const addTasks = function(){
     interactDOM().formReset('newTask')
 }
 
-displayTasks(todos)
+// displayTasks(todos)
 
 // =============== edit tasks logic, soon will be a module
 const todosView = interactDOM().hookDOMelement('todosView')
@@ -228,82 +245,4 @@ handleFilterOrder(lists, todos)
 
 console.log(todos)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//============================================================
-// import { easepick } from "@easepick/bundle"
-// import { AmpPlugin } from '@easepick/amp-plugin';
-// const mainContent = interactDOM().hookDOMelement('mainContent')
-// // import controlDatePicker from "./datepicker"
-
-
-// const datepicker = interactDOM().createElementWithClassAndId('input', 'date-picker', 'datepicker')  
-// mainContent.appendChild(datepicker)
-// const picker = new easepick.create({
-//     element: document.getElementById('datepicker'),
-//     css: [
-//         "https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css",
-//         "./main.css"
-//         // 'https://easepick.com/css/customize_sample.css',
-//         // "../src/calendar.css"
-//         // "./calendar.css"
-//     ],
-//     zIndex: 10,
-//     firstDay: 0,
-//     inline: true,
-//     AmpPlugin: {
-//         dropdown: {
-//             months: true,
-//             years: true,
-//             minYear: 2000,
-//             maxYear: 2030
-//         },
-//         darkMode: false
-//     },
-//     plugins: [AmpPlugin]
-// })
-
-//==========================================================
+// handleSaveLogic(todos, lists)
