@@ -4,7 +4,7 @@ import { modifyStatus }  from "./todoCreator";
 import { getFromLocalStorage } from "./handleSaveLogic";
 
 export default function controlStatusChange(element, index){
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     const buttons = ['to-do', 'doing', 'done', 'wont do'];
     const { top, left } = element.getBoundingClientRect()
 

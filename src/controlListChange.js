@@ -1,6 +1,7 @@
 import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyList } from "./todoCreator"
+import { getFromLocalStorage } from "./handleSaveLogic";
 
 
 function updateListOptions(lists){
@@ -21,8 +22,9 @@ function updateListOptions(lists){
 
 
 
-function controlListChange(element, index, lists, todos){
-    
+function controlListChange(element, index){
+    const todos = getFromLocalStorage('todos')
+    const lists = getFromLocalStorage('lists')
     const buttons = lists.map( list => list.listName);
     const { top, left } = element.getBoundingClientRect()
     const changeList = interactDOM().generateListOptions({top, left}, buttons, 'list')
@@ -38,10 +40,10 @@ function controlListChange(element, index, lists, todos){
     changeList.addEventListener('mousedown', e =>{
         if (e.target.classList.contains('change-list-button')){
              console.log(e.target.value);
-             modifyList(index, `${e.target.value}`, todos)
+             modifyList(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
             changeList.remove()
-             displayTasks(todos)  
+            //  displayTasks(todos)  
         }
      })
 }

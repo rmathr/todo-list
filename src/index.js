@@ -10,6 +10,7 @@ import controlDueDateChange from "./controlDueDateChange"
 import { controlListChange } from "./controlListChange"
 import { updateListOptions } from "./controlListChange"
 import { createList } from "./createList"
+import { createNewList } from "./createList"
 import displayLists from "./displayLists"
 import handleNewListForm from "./handleNewListForm"
 import handleNewTaskForm from "./handleNewTaskForm"
@@ -29,8 +30,9 @@ import { WcDatepicker } from "wc-datepicker/dist/components/wc-datepicker";
 
 // const todos = JSON.parse(localStorage.getItem('todos') || '[]')
 // const todos = []
-let todos = getFromLocalStorage() || []
-const lists = []
+let todos = getFromLocalStorage('todos') || []
+let lists = getFromLocalStorage('lists') || []
+// const lists = []
 
 
 
@@ -102,7 +104,7 @@ const addTasks = function(){
     let dueDate = interactDOM().getInputValue('dueDateInput')
     // const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
     createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
-    const todos = getFromLocalStorage()
+    const todos = getFromLocalStorage('todos')
     displayTasks(todos)
     console.log(todos)
     // todos.push(todo)
@@ -166,26 +168,20 @@ handleNewTaskForm()
 
 
 // ======================= list add logic, soon will be a new module  
-const list1 = createList('general')
-const list2 = createList('Nemo')
-const list3 = createList('Project')
-const list4 = createList('daily')
-lists.push(list1)
-lists.push(list2)
-lists.push(list3)
-lists.push(list4)
-console.log(lists.map( list => list.listName))
-displayLists(lists)
 
-// const listInput = interactDOM().hookDOMelement('listInput')
-// const listArray = lists.map( list => list.listName)
-// listArray.forEach(item => {
-//         const optionElement = interactDOM(). createElementWithClassAndId('option', 'option-input', `list${listArray.indexOf(item)}`)
-//         optionElement.value = item
-//         optionElement.textContent = item
-//         listInput.appendChild(optionElement)
-// })
-updateListOptions(lists)
+
+// const list1 = createList('general')
+// const list2 = createList('Nemo')
+// const list3 = createList('Project')
+// const list4 = createList('daily')
+// lists.push(list1)
+// lists.push(list2)
+// lists.push(list3)
+// lists.push(list4)
+// console.log(lists.map( list => list.listName))
+// displayLists(lists)
+
+// updateListOptions(lists)
 
 
 
@@ -201,8 +197,10 @@ const addNewList = interactDOM().hookDOMelement('addNewList')
 
 const addList = function (){
     const list = interactDOM().getInputValue('listName')
-    const newList = createList(list)
-    lists.push(newList)
+    const newList = createNewList(list)
+    const lists = getFromLocalStorage('lists')
+    displayLists(lists)
+    updateListOptions(lists)
     interactDOM().formReset('addListForm')
 }
 
@@ -211,18 +209,23 @@ addNewList.addEventListener('click', e =>{
     e.preventDefault()
     interactDOM().hide(newListForm)
     addList()
-    displayLists(lists)
-    updateListOptions(lists)
+    // displayLists(lists)
+    // updateListOptions(lists)
 })
+
+displayLists(lists)
+updateListOptions(lists)
 
 // ======================= list add logic, soon will be a new module
 
+
+// =============== checkbox 'done' logic
 function completeTask(element) {
     const index = +`${element.id}`.replace("checktask#", "")
     // console.log(element)
-    modifyStatus(index, 'done', todos)
-   
+    modifyStatus(index, 'done', todos) 
 }
+// =============== checkbox 'done' logic
 
 // ======================== filter tasks by list
 

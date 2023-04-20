@@ -11,9 +11,9 @@ import { addToLocalStorage } from "./handleSaveLogic";
 
 
 const deleteTask = (index) => {
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     todos.splice(index, 1)
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
@@ -25,52 +25,54 @@ function defineTaskId (todos) {
 }
 
 function modifyTask (index, taskValue) {
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     // const todo = createNewTask(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`, todos)
     // const todo = todoCreator(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     
     // todos.splice(index, 1, todo)
     const correctIndex = todos.findIndex(item => item.order == index)
     todos[correctIndex].task = `${taskValue}`
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
 
 function modifyStatus (index, statusValue) {
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     // const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
     todos[correctIndex].status = `${statusValue}`
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
 function modifyPriority (index, priorityValue) {
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${todos[index].list}`, `${priorityValue}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
     todos[correctIndex].priority = `${priorityValue}`
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
-function modifyList (index, listValue, todos) {
+function modifyList (index, listValue) {
+    let todos = getFromLocalStorage('todos')
     // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${listValue}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
     // todos.splice(index, 1, todo)
     todos[correctIndex].list = `${listValue}`
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
 
 function modifyDueDate (index, dueDateValue){
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     const correctIndex = todos.findIndex(item => item.order == index)
     todos[correctIndex].dueDate = `${dueDateValue}`
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
 
@@ -91,7 +93,7 @@ function todoCreator(task, status, list, priority, dueDate){
 
 
 const createNewTask = (task, status, list, priority, dueDate) => {
-    const todos = getFromLocalStorage()
+    const todos = getFromLocalStorage('todos')
     console.log(todos)
     const todo = todoCreator(task, status, list, priority, dueDate)
     // const newTodos = todos
@@ -99,7 +101,7 @@ const createNewTask = (task, status, list, priority, dueDate) => {
     todo.order = todos.length
     console.log(todos)
     
-    addToLocalStorage(todos)
+    addToLocalStorage(todos, 'todos')
     
     // const tempObj = newTodos[newTodos.indexOf(todo)]
     // console.log(tempObj)

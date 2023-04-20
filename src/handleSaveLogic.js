@@ -1,15 +1,12 @@
 import displayTasks from "./displayTasks";
 
-function addToLocalStorage(todos) {
-    
-    window.localStorage.setItem('todos', JSON.stringify(todos));
-    displayTasks(todos)
-    
+function addToLocalStorage(array, keyWord) {
+    window.localStorage.setItem(keyWord, JSON.stringify(array));
   }
 
 
-function getFromLocalStorage() {
-    const reference = window.localStorage.getItem('todos');
+function getFromLocalStorage(keyWord) {
+    const reference = window.localStorage.getItem(keyWord);
     // if reference exists
     if (reference) {
       // converts back to array and store it in todos array

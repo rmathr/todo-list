@@ -4,7 +4,7 @@ import { modifyPriority }  from "./todoCreator";
 import { getFromLocalStorage } from "./handleSaveLogic";
 
 export default function controlPriorityChange(element, index){
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     const buttons = ['low', 'medium', 'high'];
     const { top, left } = element.getBoundingClientRect()
     const changePriority = interactDOM().generateListOptions({top, left}, buttons, 'priority')

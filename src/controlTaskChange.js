@@ -5,7 +5,7 @@ import { addToLocalStorage } from "./handleSaveLogic";
 import { getFromLocalStorage } from "./handleSaveLogic";
 
 export default function controlTaskChange(element, index){
-    let todos = getFromLocalStorage()
+    let todos = getFromLocalStorage('todos')
     // const buttons = ['low', 'medium', 'high'];
     const correctIndex = todos.findIndex(item => item.order == index)
     const { top, left } = element.getBoundingClientRect()
