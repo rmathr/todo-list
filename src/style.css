@@ -58,7 +58,15 @@ body {
 
 .lists {
     height: 1.6rem;
-    margin: 4px 0; 
+    margin: 4px 0;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item{
+    flex-grow: 1;
 }
 
 .new-list {
@@ -137,7 +145,7 @@ body {
 }
 
 
-.delete-task{
+.delete-task, .delete-list{
     width: fit-content;
     background-color: transparent;
     border: none;
@@ -195,7 +203,7 @@ body {
 
 
 
-.delete-image{
+.delete-image, .delete-list-img{
     width: 12px;
     height: auto;
 }
@@ -322,7 +330,7 @@ body {
     transform: scale(0.8);
 }
 
-.edit-due-date{
+.edit-due-date, .new-due-date{
     transform-origin: 0 0;
     transform: scale(0.8);
 }

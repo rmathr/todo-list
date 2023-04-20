@@ -1,8 +1,18 @@
 import displayLists from "./displayLists"
 import { getFromLocalStorage } from "./handleSaveLogic";
 import { addToLocalStorage } from "./handleSaveLogic";
+import { updateListOptions } from "./controlListChange";
 
 const lists = []
+
+
+const deleteList = (index) => {
+    let lists = getFromLocalStorage('lists')
+    lists.splice(index, 1)
+    addToLocalStorage(lists, 'lists')
+    displayLists(lists)
+    updateListOptions(lists)
+}
 
 
 function modifyList (index, listValue, lists) {
@@ -48,4 +58,4 @@ const createNewList = (listName) => {
 
 
 
-export { modifyList, createList, createNewList }
+export { deleteList, modifyList, createList, createNewList }

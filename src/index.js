@@ -11,6 +11,7 @@ import { controlListChange } from "./controlListChange"
 import { updateListOptions } from "./controlListChange"
 import { createList } from "./createList"
 import { createNewList } from "./createList"
+import { deleteList } from "./createList"
 import displayLists from "./displayLists"
 import handleNewListForm from "./handleNewListForm"
 import handleNewTaskForm from "./handleNewTaskForm"
@@ -232,9 +233,15 @@ function completeTask(element) {
 const listsView = interactDOM().hookDOMelement('listsView')
 
 listsView.addEventListener('click', e => {
+    e.preventDefault()
+    e.stopPropagation()
     if(e.target.classList.contains('list-item')){
         console.log(e.target)
         filterByList(e.target, lists, todos)
+    } else if(e.target.parentNode.classList.contains('delete-list')){
+        const index = +`${e.target.parentNode.id}`.replace("deleteList#", "")
+        console.log(index)
+        deleteList(index)
     }
 })
 
