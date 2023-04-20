@@ -90,7 +90,7 @@ addTask.addEventListener('click', e =>{
     e.preventDefault()
     interactDOM().hide(newTask)
     addTasks()
-    displayTasks(todos)
+    // displayTasks(todos)
 })
 
 
@@ -101,8 +101,10 @@ const addTasks = function(){
     let priority = interactDOM().getInputValue('priorityInput')
     let dueDate = interactDOM().getInputValue('dueDateInput')
     // const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
-    const todo = createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`, todos)
-    console.log(dueDate)
+    createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
+    const todos = getFromLocalStorage()
+    displayTasks(todos)
+    console.log(todos)
     // todos.push(todo)
     interactDOM().formReset('newTask')
 }

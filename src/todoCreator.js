@@ -87,12 +87,20 @@ function todoCreator(task, status, list, priority, dueDate){
     return Object.assign(todo)
 }
 
-const createNewTask = (task, status, list, priority, dueDate, todos) => {
+
+
+
+const createNewTask = (task, status, list, priority, dueDate) => {
+    const todos = getFromLocalStorage()
+    console.log(todos)
     const todo = todoCreator(task, status, list, priority, dueDate)
     // const newTodos = todos
     todos.push(todo)
-    todo.order = todos.indexOf(todo)
+    todo.order = todos.length
+    console.log(todos)
+    
     addToLocalStorage(todos)
+    
     // const tempObj = newTodos[newTodos.indexOf(todo)]
     // console.log(tempObj)
     // const tempTodos = JSON.parse(localStorage.getItem('todos') || '[]')
