@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
+
+:root{
+    --lists-font-color: #acacac;
+    --background-black: #121212;
+    --fonts-white-color: #e8e8e8;
+    --background-main-content: #242424;
+    --grid-column-tasks: 1rem minmax(25rem, 36rem) 10rem 12rem 10rem 10rem 1rem;
+    --grid-column-titles: minmax(26rem, 37rem) 10rem 12rem 10rem 11rem;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -34,6 +44,7 @@ body {
 .sidebar-brand{
     display: flex;
     flex-direction: row;
+    padding: 0 5px;
 }
 
 .sidebar-title {
@@ -52,26 +63,29 @@ body {
 
 .lists-view-title{
     height: 1.6rem;
-    width: 70%;
-    border-bottom: 1px solid rgba(232, 232, 232, 0.1); 
+    width: 90%;
+    /* border-bottom: 1px solid rgba(232, 232, 232, 0.1); */
+    padding: 0 5px; 
+    font-size: 1.3rem;
 }
 
 .lists {
     height: 1.6rem;
     margin: 4px 0;
     display: flex;
-    width: 80%;
+    width: 90%;
     justify-content: space-between;
     align-items: center;
+    padding: 0 5px;
+    font-size: 1.1rem;
+    color: var(--lists-font-color);
 }
 
 .list-item{
     flex-grow: 1;
 }
 
-.new-list {
-    margin-top: 12px;
-}
+
 
 .main-content{
     flex-grow: 1;
@@ -95,7 +109,10 @@ body {
     /* display: flex;
     flex-direction: row; */
     display: grid;
-    grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr;
+    /* grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr; */
+    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
+    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7rem 8rem 7rem 7rem 1rem; */
+    grid-template-columns: var(--grid-column-tasks);
     grid-template-rows: 1.6rem;
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
 }
@@ -104,25 +121,15 @@ body {
     align-self: center;
 }
 
-/* .todos > *, .todos-general-titles > *{
-    width: 5rem;
-} */
-
-/* .todo-tasks, #todosTasksTitle{
-    width: 14rem;
-} */
-
-.todo-status, .todo-list, .todo-priority, .todo-due-date{
-    justify-self: flex-start;
-}
-
 .todos-general-titles {
     display: flex;
     flex-direction: row;
     /* font-weight: 700; */
     /* width: 90%; */
     display: grid;
-    grid-template-columns: 16fr 7fr 7fr 7fr 8fr;;
+    /* grid-template-columns: 16fr 7fr 7fr 7fr 8fr; */
+    grid-template-columns: var(--grid-column-titles);
+    
     grid-template-rows: 1.6rem;
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
     text-transform: capitalize;
@@ -161,12 +168,27 @@ body {
 }
 
 .add-new-task{
+    margin-top: 6px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 90%;
-    height: 1.6rem;
+   
+    /* align-items: center; */
     /* display: grid;
     grid-template-columns: 1fr 8fr; */
+    /* grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr; */
+}
+
+
+.new-task{
+    display: grid;
+    grid-template-columns: var(--grid-column-tasks);
+    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
+    grid-template-rows: 1.6rem;
+}
+
+.open-task-form{
+    height: 1.6rem;
 }
 
 .open-task-form, .new-list{
@@ -176,7 +198,17 @@ body {
     color: #e8e8e8;
     background-color: transparent;
     border: none;
+    font-size: 1rem;
     /* align-self: flex-start; */
+}
+
+
+
+.new-list{
+    margin-top: 12px;
+    padding: 0 5px;
+    font-size: 1.1rem;
+    color: var(--lists-font-color)
 }
 
 .task-form-image{
@@ -203,12 +235,15 @@ body {
 
 
 
-.delete-image, .delete-list-img{
+.delete-image{
     width: 12px;
     height: auto;
 }
 
-
+.delete-list-img{
+    width: 18px;
+    height: auto;
+}
 
 .new-list-form{
     position: absolute;
@@ -271,6 +306,52 @@ body {
 
     backdrop-filter: blur(100px);
 }
+
+
+/* edit task */
+input[type=text]{
+    background-color: var(--background-main-content);
+    color: var(--fonts-white-color);
+    font-size: 1rem;
+    border: 0;
+    text-decoration: none;
+}
+
+input[type=text]:focus, input[type=number]:focus, select:focus {
+    outline: none;
+  }
+
+  select {
+    /* Reset */
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    /* Personalize */
+    width: 1.8*var(--cell-size);
+    /* height: 36px; */
+    padding: 0 56px 0 12px;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center/1.4em, linear-gradient(to left, rgba(255, 255, 255, 0.3) 3em, rgba(255, 255, 255, 0.2) 3em);
+    color: #f5f1f2;
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+select option {
+    color: inherit;
+    background-color: #4f6e7d;
+}
+select:focus {
+    outline: none;
+}
+select::-ms-expand {
+    display: none;
+}
+
+
+/* edit task */
 
 
 
@@ -337,9 +418,58 @@ body {
 
 /* calendar widget */
 
-
-.date-picker.sc-wc-datepicker-h.sc-wc-datepicker-s{
-    
-    border: 1px solid #e8e8e8;
+.wc-datepicker, .wc-datepicker *, .wc-datepicker *:before, .wc-datepicker *:after, .wc-datepicker__month-select, .sc-wc-datepicker.wc-datepicker__month-select select{
+    background-color: #242424;
+    color: var(--fonts-white-color);
 }
+ 
+.wc-datepicker__current-month > .wc-datepicker__month-select,
+.wc-datepicker__current-month > .wc-datepicker__year-select,
+.wc-datepicker__header > button{
+    background-color: #242424;
+    color: var(--fonts-white-color);
+}
+#datepicker{
+    background-color: #242424;
+    border: 1px solid rgba(232, 232, 232, 0.1);
+    box-shadow: 0px 5px 41px 5px var(--background-black)
+}
+
+.wc-datepicker__month-select, .wc-datepicker__year-select{
+    transform: scale(1.2);
+}
+
 /* calendar widget */
+
+
+/* effects */
+.lists:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #242424;
+    transition: ease 0.05s;
+}
+
+.todo-tasks:hover,
+.todo-status:hover,
+.todo-lists:hover,
+.todo-priority:hover,
+.todo-due-date:hover{
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: rgb(49 49 49);
+    transition: ease 0.05s;
+    padding: 0 5px;
+}
+
+.todo-tasks:hover{
+    cursor: text;
+}
+
+
+/* .delete-image-img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: ease 0.05s;
+} */
+/* effects */

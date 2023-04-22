@@ -24,13 +24,22 @@ const interactDOM = function(){
         return interactDOM().hookDOMelement(idName).value
     }
 
-    const toggleElementDisplay = function(element){
-        if(element.style.display == 'flex'){
-            element.style.display = 'none'
-        } else {
-            element.style.display = 'flex'
+    const toggleElementDisplay = function(element, displayValue){
+        if(arguments.length > 1){
+            element.style.display == displayValue ? element.style.display = 'none' : element.style.display = displayValue
+        } else if (arguments.length == 1){
+            element.style.display == 'flex' ? element.style.display = 'none' : element.style.display = 'flex'
         }
+        
+        
+        // if(element.style.display == 'flex'){
+        //     element.style.display = 'none'
+        // } else {
+        //     element.style.display = 'flex'
+        // }
     }
+
+   
 
     const hide = function(element){
         element.style.display = 'none'

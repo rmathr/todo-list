@@ -11,10 +11,10 @@ export default function controlDueDateChange(element, index){
     let todos = getFromLocalStorage('todos')
     // const buttons = ['low', 'medium', 'high'];
     const correctIndex = todos.findIndex(item => item.order == index)
-    const { top, left } = element.getBoundingClientRect()
+    const { top, left, width } = element.getBoundingClientRect()
 
     
-    const datePicker = interactDOM().createElementWithClassAndId('wc-datepicker', 'date-picker', 'datepicker')
+    const datePicker = interactDOM().createElementWithClassAndId('wc-datepicker', 'new-due-date', 'datepicker')
     datePicker.classList.add('edit-due-date')
     const currentDate = todos[correctIndex].dueDate 
     datePicker.setAttribute('start-date', `${currentDate}`)
@@ -24,13 +24,14 @@ export default function controlDueDateChange(element, index){
     datePicker.style.position = 'absolute'
     datePicker.style.display = 'flex'
     datePicker.style.top = `${top}px`;
-    datePicker.style.left = `${left}px`; 
+    datePicker.style.left = `${left - (238-width)}px`; 
     document.body.appendChild(datePicker);
     
     document.addEventListener('mousedown', e =>{
+        if(!e.target.closest('.new-due-date'))
            datePicker.remove()
     })
-    function handleDateChange(){
+    //function handleDateChange(){
         datePicker.addEventListener('selectDate', function(event) {
             console.log(event)
             const datepicked = event.detail
@@ -39,11 +40,12 @@ export default function controlDueDateChange(element, index){
             // displayTasks(todos)
             console.log(todos)
         });
-    }
-    datePicker.addEventListener('mousedown', e => {
-        e.preventDefault()
-        e.stopPropagation()
-        handleDateChange()
-    })    
+    //}
+    
+    // datePicker.addEventListener('mousedown', e => {
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //     handleDateChange()
+    // })    
     
 }

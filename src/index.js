@@ -258,4 +258,15 @@ handleFilterOrder(lists, todos)
 
 console.log(todos)
 
-// handleSaveLogic(todos, lists)
+document.body.addEventListener('mousedown', e =>{
+    console.log(e.target.getBoundingClientRect())
+})
+
+
+// document.body.addEventListener('mouseover', e => {
+//     if(e.target.classList.contains('delete-list-img')){
+//         console.log('entered!')
+//         e.target.style.cursor = 'pointer'
+//         e.target.style.transform = 'scale(1.1)'
+//     }
+// })

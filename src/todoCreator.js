@@ -13,6 +13,7 @@ import { addToLocalStorage } from "./handleSaveLogic";
 const deleteTask = (index) => {
     let todos = getFromLocalStorage('todos')
     todos.splice(index, 1)
+    todos.forEach(todo => todo.order = todos.indexOf(todo))
     addToLocalStorage(todos, 'todos')
     displayTasks(todos)
 }
@@ -94,11 +95,12 @@ function todoCreator(task, status, list, priority, dueDate){
 
 const createNewTask = (task, status, list, priority, dueDate) => {
     const todos = getFromLocalStorage('todos')
+    // displayTasks(todos)
     console.log(todos)
     const todo = todoCreator(task, status, list, priority, dueDate)
     // const newTodos = todos
     todos.push(todo)
-    todo.order = todos.length
+    todo.order = todos.length - 1
     console.log(todos)
     
     addToLocalStorage(todos, 'todos')
