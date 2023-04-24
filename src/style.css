@@ -3,11 +3,16 @@
 
 :root{
     --lists-font-color: #acacac;
+    --forms-font-color: #585758;
     --background-black: #121212;
+    --background-dropdown-menus: rgb(49,49,49);
     --fonts-white-color: #e8e8e8;
+    --border-gray-color: rgba(232, 232, 232, 0.1);
     --background-main-content: #242424;
-    --grid-column-tasks: 1rem minmax(25rem, 36rem) 10rem 12rem 10rem 10rem 1rem;
-    --grid-column-titles: minmax(26rem, 37rem) 10rem 12rem 10rem 11rem;
+    --grid-column-tasks: 1rem minmax(24rem, 35rem) 8rem 12rem 8rem 8rem 1rem;
+    --grid-column-titles: minmax(25rem, 36rem) 8rem 12rem 8rem 9rem;
+    --grid-row-size: 2rem;
+    --grid-column-gap: 10px
 }
 
 *{
@@ -34,6 +39,8 @@ body {
     padding: 12px;
     display: flex;
     flex-direction: column;
+    border-right: 3px solid var(--border-gray-color);
+    /* box-shadow: -1px 2px 38px -2px var(--border-gray-color); */
 }
 
 .image-brand{
@@ -99,6 +106,7 @@ body {
 
 .todos-view{
     width: 90%;
+    /* width: fit-content; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -109,17 +117,24 @@ body {
     /* display: flex;
     flex-direction: row; */
     display: grid;
+    /* width: fit-content; */
     /* grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr; */
     /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
     /* grid-template-columns: 1rem minmax(16rem, 25rem) 7rem 8rem 7rem 7rem 1rem; */
     grid-template-columns: var(--grid-column-tasks);
-    grid-template-rows: 1.6rem;
+    /* grid-template-rows: 1.6rem; */
+    grid-template-rows: var(--grid-row-size);
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
 }
 
 .todos > * {
     align-self: center;
 }
+
+.todos-general-titles > :not(:first-child) {
+    padding-left: var(--grid-column-gap);
+}  
+
 
 .todos-general-titles {
     display: flex;
@@ -129,15 +144,27 @@ body {
     display: grid;
     /* grid-template-columns: 16fr 7fr 7fr 7fr 8fr; */
     grid-template-columns: var(--grid-column-titles);
-    
-    grid-template-rows: 1.6rem;
+    /* grid-template-rows: 1.6rem; */
+    grid-template-rows: var(--grid-row-size);
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
     text-transform: capitalize;
+}
+
+.todo-tasks, .todo-status, .todo-lists, .todo-priority, .todo-due-date{
+    padding-left: var(--grid-column-gap);
+}
+
+.new-task > :not(:first-child){
+    padding-left: var(--grid-column-gap);
+} 
+.new-task > :last-child{
+    padding-left: 0
 }
 
 .todos-titles{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .expand-icon{
@@ -184,11 +211,14 @@ body {
     display: grid;
     grid-template-columns: var(--grid-column-tasks);
     /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
-    grid-template-rows: 1.6rem;
+    /* grid-template-rows: 1.6rem; */
+    grid-template-rows: var(--grid-row-size);
 }
 
 .open-task-form{
-    height: 1.6rem;
+    /* height: 1.6rem; */
+    height: var(--grid-row-size);
+    width: fit-content;
 }
 
 .open-task-form, .new-list{
@@ -241,9 +271,13 @@ body {
 }
 
 .delete-list-img{
-    width: 18px;
+    width: 22px;
     height: auto;
+    visibility: hidden;
 }
+
+
+/* ========================= new list form ========================= */
 
 .new-list-form{
     position: absolute;
@@ -251,17 +285,18 @@ body {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    width: 250px;
-    height: 300px;
-    background-color: #121212;
-    color: rgba(232, 232, 232, 0.1);
+    width: 300px;
+    height: 260px;
+    background-color: var(--background-main-content);
+    color: #b3b3b3;
     flex-direction: column;
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
     padding: 12px;
     z-index: 1;
-    box-shadow: rgba(198, 188, 188, 0.56) 0px 22px 700px 4000px;
+    box-shadow: rgba(18, 18, 18, 0.7) 0px 22px 700px 4000px;
+    border: 1px solid rgba(232, 232, 232, 0.1)
 }
 
 .add-list-form{
@@ -272,16 +307,29 @@ body {
     justify-content: space-evenly;
 }
 
-.add-list-form input {
+#listName, #listDescription {
     background-color: transparent;
     border: 1px solid rgba(232, 232, 232, 0.1);
     border-radius: 5px;
     margin-top: 8px;
     color: #e8e8e8;
+    height: 2rem;
+    padding: 4px 6px;
 }
 
+#listDescription{
+    height: 4rem;
+}
 
+.label-input-name, .label-input-description{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 
+.label-input-name{
+    margin-top: 12px;
+}
 
 .new-list-buttons{
     width: 90%;
@@ -290,11 +338,23 @@ body {
     justify-content: space-between;
 }
 
+.new-list-buttons button{
+    background-color: transparent;
+    color: inherit;
+    border: 1px solid rgba(232, 232, 232, 0.1);
+    border-radius: 0.25em;
+    padding: 4px;
+}
+
 .new-list-form-title{
     width: 90%;
 }
 
+textarea{
+    outline: none;
+}
 
+/* ========================= new list form ========================= */
 
 .clicked{
     background-color: aqua;
@@ -331,17 +391,19 @@ input[type=text]:focus, input[type=number]:focus, select:focus {
     font: inherit;
     /* Personalize */
     width: 1.8*var(--cell-size);
-    /* height: 36px; */
-    padding: 0 56px 0 12px;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center/1.4em, linear-gradient(to left, rgba(255, 255, 255, 0.3) 3em, rgba(255, 255, 255, 0.2) 3em);
-    color: #f5f1f2;
     border-radius: 0.25em;
-    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--background-main-content);
+    color: var(--forms-font-color);
+    /* box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2); */
     cursor: pointer;
 }
 select option {
-    color: inherit;
-    background-color: #4f6e7d;
+    color: var(--fonts-white-color);
+    background-color: var(--background-dropdown-menus);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* border: 1px solid rgba(232, 232, 232, 0.1); */
+    border: 0px;
+    border-radius: 2px;
 }
 select:focus {
     outline: none;
@@ -350,6 +412,14 @@ select::-ms-expand {
     display: none;
 }
 
+.add-task{
+    border: none;
+    background-color: transparent;
+    color: var(--forms-font-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    align-self: center;
+}
 
 /* edit task */
 
@@ -466,10 +536,30 @@ select::-ms-expand {
     cursor: text;
 }
 
+.add-task:hover{
+    cursor: pointer;
+}
 
-/* .delete-image-img:hover{
+button:hover{
+    cursor: pointer;
+}
+
+#listName:focus, #listDescription:focus{
+    /* border: 2px solid rgba(232, 232, 232, 0.1);   */
+    border: 2px solid rgb(94,94,94);  
+}
+
+.border-right-titles{
+    border-right: 1px solid rgba(232, 232, 232, 0.1)
+}
+
+.delete-image-img-hover{
     cursor: pointer;
     transform: scale(1.1);
     transition: ease 0.05s;
-} */
+}
+
+.image-visible{
+    visibility: visible;
+}
 /* effects */

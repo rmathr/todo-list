@@ -22,6 +22,7 @@ import handleFilterOrder from "./handleFilterOrder"
 import handleSaveLogic from "./handleSaveLogic"
 import { deleteTask } from "./todoCreator"
 import { getFromLocalStorage } from "./handleSaveLogic"
+import handleEffects from "./handleEffects"
 
 import arrowRight  from './right.png'
 
@@ -247,20 +248,20 @@ listsView.addEventListener('click', e => {
 
 // ======================== filter tasks by list
 
-const removeFilter = interactDOM().hookDOMelement('removeFilter')
-removeFilter.addEventListener('mousedown', e => {
-    e.preventDefault()
-    displayTasks(todos)
-})
+// const removeFilter = interactDOM().hookDOMelement('removeFilter')
+// removeFilter.addEventListener('mousedown', e => {
+//     e.preventDefault()
+//     displayTasks(todos)
+// })
 
 
 handleFilterOrder(lists, todos)
 
 console.log(todos)
 
-document.body.addEventListener('mousedown', e =>{
-    console.log(e.target.getBoundingClientRect())
-})
+// document.body.addEventListener('mousedown', e =>{
+//     console.log(e.target.getBoundingClientRect())
+// })
 
 
 // document.body.addEventListener('mouseover', e => {
@@ -270,3 +271,5 @@ document.body.addEventListener('mousedown', e =>{
 //         e.target.style.transform = 'scale(1.1)'
 //     }
 // })
+
+handleEffects()

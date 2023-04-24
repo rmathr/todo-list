@@ -1,4 +1,5 @@
 import interactDOM from "./interactDom"
+import format from "date-fns/format"
 
 
 
@@ -7,15 +8,23 @@ export default function handleNewTaskForm (){
     const openTaskForm = interactDOM().hookDOMelement('openTaskForm')
     const newTask = interactDOM().hookDOMelement('newTask')
     openTaskForm.addEventListener('mousedown', e =>{
+        // setInterval(function(){
+            
+        // }, 300)
+        
         e.preventDefault()
-        e.stopPropagation()
-        interactDOM().toggleElementDisplay(newTask, 'grid');
+            e.stopPropagation()
+            interactDOM().toggleElementDisplay(newTask, 'grid');
     })
     const dueDateInput = interactDOM().hookDOMelement('dueDateInput')
     const datePicker = interactDOM().createElementWithClassAndId('wc-datepicker', 'new-due-date', 'datepicker')
     dueDateInput.addEventListener('mousedown', e => {
         e.stopPropagation()
         const { top, left, width } = e.target.getBoundingClientRect()
+        const currentDate = format(new Date(), "P")
+        datePicker.setAttribute('start-date', `${currentDate}`)
+        datePicker.value = new Date(`${currentDate.replaceAll('-', '/')}`)
+
         datePicker.style.position = 'absolute'
         datePicker.style.display = 'flex'
         datePicker.style.top = `${top + 26}px`;
