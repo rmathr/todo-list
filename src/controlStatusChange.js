@@ -2,6 +2,7 @@ import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyStatus }  from "./todoCreator";
 import { getFromLocalStorage } from "./handleSaveLogic";
+import { handleEffects } from "./handleEffects";
 
 export default function controlStatusChange(element, index){
     let todos = getFromLocalStorage('todos')
@@ -41,6 +42,7 @@ export default function controlStatusChange(element, index){
              modifyStatus(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
             changeStatus.remove()
+            handleEffects()
             //  displayTasks(todos)  
         }
      })

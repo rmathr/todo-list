@@ -1,6 +1,14 @@
 import interactDOM from "./interactDom";
+import { getFromLocalStorage } from "./handleSaveLogic";
 
-export default function handleEffects(){
+function hex2rgba (hex, alpha) {
+    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+    return `rgba(${r},${g},${b},${alpha})`;
+  };
+
+
+
+function handleEffects(){
     const titles = interactDOM().returnAllMatchingElements('todos-titles')
     titles.forEach(title => {
         title.addEventListener('mouseenter', e => {
@@ -39,7 +47,18 @@ export default function handleEffects(){
         })
     })
 
+    const todoLists = interactDOM().returnAllMatchingElements('todo-lists')
+    todoLists.forEach(list => {
+        const lists = getFromLocalStorage('lists')
+        const color = lists.filter(item => item.listName == list.textContent).map(item => item.color)
+        // list.style.backgroundColor = `${color[0]}`
+        list.style.backgroundColor = `${hex2rgba(color[0], 0.3)}`
+    })
+
+
+
 }
 
 
+export { hex2rgba, handleEffects }
 

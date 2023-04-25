@@ -7,17 +7,22 @@ export default function handleNewListForm (e){
     const mainContainer = interactDOM().hookDOMelement('mainContainer')
     mainContainer.classList.add('blur')
     document.body.addEventListener('mousedown', e => {
-        if(!e.target.parentNode.classList.contains('new-list-form') 
-        && !e.target.parentNode.classList.contains('add-list-form')
-        && !e.target.parentNode.classList.contains('label-input-name')
-        && !e.target.parentNode.classList.contains('label-input-description')
-        && !e.target.parentNode.classList.contains('new-list-buttons')
-        && !e.target.classList.contains('new-list-form')
-        && !e.target.parentNode.classList.contains('new-list')
-        || e.target.classList.contains('cancel-list-add')){
-            // console.log(e.target)
+        if((!e.target.closest('.new-list-form')) || e.target.classList.contains('cancel-list-add')){
             interactDOM().hide(newListForm)
-            // newTask.remove()
         }
+
+
+        // if(!e.target.parentNode.classList.contains('new-list-form') 
+        // && !e.target.parentNode.classList.contains('add-list-form')
+        // && !e.target.parentNode.classList.contains('label-input-name')
+        // && !e.target.parentNode.classList.contains('label-input-description')
+        // && !e.target.parentNode.classList.contains('new-list-buttons')
+        // && !e.target.classList.contains('new-list-form')
+        // && !e.target.parentNode.classList.contains('new-list')
+        // || e.target.classList.contains('cancel-list-add')){
+        //     // console.log(e.target)
+        //     interactDOM().hide(newListForm)
+        //     // newTask.remove()
+        // }
     })
 }

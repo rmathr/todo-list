@@ -12,7 +12,8 @@
     --grid-column-tasks: 1rem minmax(24rem, 35rem) 8rem 12rem 8rem 8rem 1rem;
     --grid-column-titles: minmax(25rem, 36rem) 8rem 12rem 8rem 9rem;
     --grid-row-size: 2rem;
-    --grid-column-gap: 10px
+    --grid-column-gap: 10px;
+    --dynamic-background-color: #242424
 }
 
 *{
@@ -154,6 +155,14 @@ body {
     padding-left: var(--grid-column-gap);
 }
 
+.todo-lists{
+    /* opacity: 0.7; */
+    border-radius: 3px;
+    line-height: 1.5rem;
+}
+
+
+
 .new-task > :not(:first-child){
     padding-left: var(--grid-column-gap);
 } 
@@ -188,8 +197,8 @@ body {
 
 .change-status, .change-priority, .change-list{
     /* display: none; */
-    width: 100px;
-    height: 120px;
+    /* width: 100px; */
+    /* height: 120px; */
     flex-direction: column;
     position: absolute;
 }
@@ -213,6 +222,10 @@ body {
     /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
     /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
+}
+
+.button-task-text{
+    padding-left: var(--grid-column-gap);
 }
 
 .open-task-form{
@@ -310,7 +323,6 @@ body {
 #listName, #listDescription {
     background-color: transparent;
     border: 1px solid rgba(232, 232, 232, 0.1);
-    border-radius: 5px;
     margin-top: 8px;
     color: #e8e8e8;
     height: 2rem;
@@ -319,6 +331,7 @@ body {
 
 #listDescription{
     height: 4rem;
+    border-radius: 5px;
 }
 
 .label-input-name, .label-input-description{
@@ -353,6 +366,40 @@ body {
 textarea{
     outline: none;
 }
+
+.name-color{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+}
+
+#listName{
+    width: 88%;
+    margin-top: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#listColor {
+    width: 12%;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    cursor: pointer;
+    height: 2rem;
+    padding: 4px 6px;
+    border: 1px solid rgba(232, 232, 232, 0.1);
+    border-right: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+
+
 
 /* ========================= new list form ========================= */
 
@@ -426,7 +473,7 @@ select::-ms-expand {
 
 
 
-.expanded-menu, .expanded-filter-menu, .expanded-sort-menu{
+.expanded-menu, .expanded-filter-menu, .expanded-sort-menu, .change-status-button, .change-list-button, .change-priority-button{
     width: 150px;
     /* width: fit-content; */
     /* height: 50px; */
@@ -437,6 +484,12 @@ select::-ms-expand {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: 1px solid rgba(232, 232, 232, 0.1);
     border-radius: 2px;
+}
+
+.change-status-button, .change-list-button, .change-priority-button{
+    height: 25px;
+    line-height: 25px;
+    color: var(--fonts-white-color);
 }
 
 .expanded-menu button {

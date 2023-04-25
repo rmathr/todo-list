@@ -3,6 +3,7 @@ import displayTasks from "./displayTasks";
 import { modifyTask}  from "./todoCreator";
 import { addToLocalStorage } from "./handleSaveLogic";
 import { getFromLocalStorage } from "./handleSaveLogic";
+import { handleEffects } from "./handleEffects";
 
 export default function controlTaskChange(element, index){
     let todos = getFromLocalStorage('todos')
@@ -24,6 +25,7 @@ export default function controlTaskChange(element, index){
         if(!e.target.classList.contains('change-task-input') && document.contains(changeTask)){
             modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
+            handleEffects()
             // displayTasks(todos)
         }
     })
@@ -32,6 +34,7 @@ export default function controlTaskChange(element, index){
         if(e.keyCode == 13){
             modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
+            handleEffects()
             // displayTasks(todos) 
         }
     })

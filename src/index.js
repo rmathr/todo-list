@@ -22,7 +22,7 @@ import handleFilterOrder from "./handleFilterOrder"
 import handleSaveLogic from "./handleSaveLogic"
 import { deleteTask } from "./todoCreator"
 import { getFromLocalStorage } from "./handleSaveLogic"
-import handleEffects from "./handleEffects"
+import { handleEffects } from "./handleEffects"
 
 import arrowRight  from './right.png'
 
@@ -111,6 +111,7 @@ const addTasks = function(){
     console.log(todos)
     // todos.push(todo)
     interactDOM().formReset('newTask')
+    handleEffects()
 }
 
 // displayTasks(todos)
@@ -126,11 +127,12 @@ todosView.addEventListener('click', (e) => {
         const index = +`${e.target.id}`.replace("status", "")
         // console.log(index)
         // handleStatusChange (e.target, index)
-        controlStatusChange(e.target, index, todos)
+        controlStatusChange(e.target, index)
     } else if (e.target.classList.contains('todo-priority')){
         const index = +`${e.target.id}`.replace("priority", "")
         // console.log(index)
-        controlPriorityChange(e.target, index, todos) 
+        controlPriorityChange(e.target, index)
+        
     } else if (e.target.classList.contains('check-task')){
         
         e.target.classList.toggle('clicked')
@@ -145,13 +147,13 @@ todosView.addEventListener('click', (e) => {
 
     } else if (e.target.classList.contains('todo-lists')){
         const index = +`${e.target.id}`.replace("list", "")
-        controlListChange(e.target, index, lists, todos)
+        controlListChange(e.target, index)
     } else if(e.target.classList.contains('todo-tasks')){
         const index = +`${e.target.id}`.replace("task", "")
-        controlTaskChange(e.target, index, todos)
+        controlTaskChange(e.target, index)
     } else if(e.target.classList.contains('todo-due-date')){
         const index = +`${e.target.id}`.replace("dueDate", "")
-        controlDueDateChange(e.target, index, todos)
+        controlDueDateChange(e.target, index)
     }
     
     // else {
@@ -198,12 +200,15 @@ newList.addEventListener('click', e => {
 const addNewList = interactDOM().hookDOMelement('addNewList')
 
 const addList = function (){
-    const list = interactDOM().getInputValue('listName')
-    const newList = createNewList(list)
+    let listName = interactDOM().getInputValue('listName')
+    let color = interactDOM().getInputValue('listColor')
+    let description = interactDOM().getInputValue('listDescription')
+    createNewList(`${listName}`, `${color}`, `${description}`)
     const lists = getFromLocalStorage('lists')
     displayLists(lists)
     updateListOptions(lists)
     interactDOM().formReset('addListForm')
+    handleEffects()
 }
 
 addNewList.addEventListener('click', e =>{
@@ -237,12 +242,15 @@ listsView.addEventListener('click', e => {
     e.preventDefault()
     e.stopPropagation()
     if(e.target.classList.contains('list-item')){
+        const todos = getFromLocalStorage('todos')
+        const lists = getFromLocalStorage('lists')
         console.log(e.target)
         filterByList(e.target, lists, todos)
     } else if(e.target.parentNode.classList.contains('delete-list')){
         const index = +`${e.target.parentNode.id}`.replace("deleteList#", "")
         console.log(index)
         deleteList(index)
+        handleEffects()
     }
 })
 

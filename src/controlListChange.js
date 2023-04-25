@@ -2,6 +2,7 @@ import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyList } from "./todoCreator"
 import { getFromLocalStorage } from "./handleSaveLogic";
+import { handleEffects } from "./handleEffects";
 
 
 function updateListOptions(lists){
@@ -42,6 +43,7 @@ function controlListChange(element, index){
              console.log(e.target.value);
              modifyList(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
+            handleEffects()
             changeList.remove()
             //  displayTasks(todos)  
         }

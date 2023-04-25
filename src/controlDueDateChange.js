@@ -6,6 +6,7 @@ import "wc-datepicker/dist/themes/dark.css";
 import { eachWeekOfInterval } from "date-fns";
 // customElements.define("wc-datepicker", WcDatepicker);
 import { getFromLocalStorage } from "./handleSaveLogic";
+import { handleEffects } from "./handleEffects";
 
 export default function controlDueDateChange(element, index){
     let todos = getFromLocalStorage('todos')
@@ -37,6 +38,7 @@ export default function controlDueDateChange(element, index){
             const datepicked = event.detail
             modifyDueDate(index, datepicked)
             datePicker.remove()
+            handleEffects()
             // displayTasks(todos)
             console.log(todos)
         });

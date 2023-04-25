@@ -2,6 +2,7 @@ import interactDOM from "./interactDom";
 import displayTasks from "./displayTasks";
 import { modifyPriority }  from "./todoCreator";
 import { getFromLocalStorage } from "./handleSaveLogic";
+import { handleEffects } from "./handleEffects";
 
 export default function controlPriorityChange(element, index){
     let todos = getFromLocalStorage('todos')
@@ -21,6 +22,7 @@ export default function controlPriorityChange(element, index){
         if (e.target.classList.contains('change-priority-button')){
              console.log(e.target.value);
              modifyPriority(index, `${e.target.value}`)
+             handleEffects() 
             //  interactDOM().hide(changeStatus);
             // changePriority.remove()
             //  displayTasks(todos)  

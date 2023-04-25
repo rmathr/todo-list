@@ -3,8 +3,6 @@ import { getFromLocalStorage } from "./handleSaveLogic";
 import { addToLocalStorage } from "./handleSaveLogic";
 import { updateListOptions } from "./controlListChange";
 
-const lists = []
-
 
 const deleteList = (index) => {
     let lists = getFromLocalStorage('lists')
@@ -23,18 +21,21 @@ function modifyList (index, listValue, lists) {
     displayLists(lists)
 }
 
-function createList (listName){
+function createList (listName, color, description){
     let list = {
-        listName
+        listName,
+        color,
+        description
     }
     return Object.assign({}, list)
 }
 
 
-const createNewList = (listName) => {
+const createNewList = (listName, color, description) => {
     const lists = getFromLocalStorage('lists')
-    const list = createList(listName)
+    const list = createList(listName, color, description)
     lists.push(list)
+    console.log(lists)
     addToLocalStorage(lists, 'lists')
 }
 
