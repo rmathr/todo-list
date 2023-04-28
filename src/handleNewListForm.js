@@ -1,13 +1,14 @@
 import interactDOM from "./interactDom"
+import { addList } from "./handleNewListLogic"
 
 export default function handleNewListForm (e){
     e.preventDefault()
     const newListForm = interactDOM().hookDOMelement('newListForm')
     interactDOM().toggleElementDisplay(newListForm)
     const mainContainer = interactDOM().hookDOMelement('mainContainer')
-    mainContainer.classList.add('blur')
+    // mainContainer.classList.add('blur')
     document.body.addEventListener('mousedown', e => {
-        if((!e.target.closest('.new-list-form')) || e.target.classList.contains('cancel-list-add')){
+        if((!e.target.closest('.new-list-form')) || e.target.closest('.cancel-list-add')){
             interactDOM().hide(newListForm)
         }
 
@@ -24,5 +25,15 @@ export default function handleNewListForm (e){
         //     interactDOM().hide(newListForm)
         //     // newTask.remove()
         // }
+    })
+
+    document.body.addEventListener('keydown', e => {
+        if(e.key == 'Escape'){
+            interactDOM().hide(newListForm)             
+        } else if(e.key == 'Enter'){
+            const newListForm = interactDOM().hookDOMelement('newListForm')
+            addList()
+            interactDOM.hide(newListForm)
+        }
     })
 }

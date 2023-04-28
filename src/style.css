@@ -13,7 +13,10 @@
     --grid-column-titles: minmax(25rem, 36rem) 8rem 12rem 8rem 9rem;
     --grid-row-size: 2rem;
     --grid-column-gap: 10px;
-    --dynamic-background-color: #242424
+    --dynamic-background-color: #242424;
+    --due-date-red: rgb(255, 76, 118);
+    --due-date-yellow: rgb(246, 176, 101);
+    --done-background-color: rgb(0, 184, 168)
 }
 
 *{
@@ -27,6 +30,7 @@ body {
     color: #e8e8e8;
     background-color: black;
   }
+
 
 .main-container{
     display: flex;
@@ -151,14 +155,15 @@ body {
     text-transform: capitalize;
 }
 
-.todo-tasks, .todo-status, .todo-lists, .todo-priority, .todo-due-date{
+.todo-tasks, .todo-lists, .todo-status, .todo-priority, .todo-due-date{
     padding-left: var(--grid-column-gap);
 }
 
-.todo-lists{
+.todo-lists, .todo-status{
     /* opacity: 0.7; */
     border-radius: 3px;
     line-height: 1.5rem;
+    padding-right: var(--grid-column-gap);
 }
 
 
@@ -177,6 +182,7 @@ body {
 }
 
 .expand-icon{
+    visibility: hidden;
     width: 22px;
     height: auto;
 }
@@ -222,6 +228,7 @@ body {
     /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
     /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
+    border-bottom: 1px solid var(--border-gray-color);
 }
 
 .button-task-text{
@@ -232,6 +239,10 @@ body {
     /* height: 1.6rem; */
     height: var(--grid-row-size);
     width: fit-content;
+    margin-top: 4px;
+    border-radius: 7px;
+    position: relative;
+    overflow: hidden;
 }
 
 .open-task-form, .new-list{
@@ -355,7 +366,7 @@ body {
     background-color: transparent;
     color: inherit;
     border: 1px solid rgba(232, 232, 232, 0.1);
-    border-radius: 0.25em;
+    border-radius: 7px;
     padding: 4px;
 }
 
@@ -397,23 +408,21 @@ textarea{
     border-bottom-left-radius: 5px;
 }
 
-
+.label-button{
+    font-size: 0.7rem;
+    border: 1px solid var(--border-gray-color);
+    border-radius: 3px;
+    padding: 0 2px;
+    margin-left: 4px;
+}
 
 
 
 /* ========================= new list form ========================= */
 
 .clicked{
-    background-color: aqua;
+    background-color: var(--done-background-color);
 }
-
-#mainContainer .blur{
-    position: relative;
-    z-index: 0;
-
-    backdrop-filter: blur(100px);
-}
-
 
 /* edit task */
 input[type=text]{
@@ -482,7 +491,7 @@ select::-ms-expand {
     z-index: 1;
     background-color: rgb(49 49 49);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border: 1px solid rgba(232, 232, 232, 0.1);
+    border: 1px solid var(--border-gray-color);
     border-radius: 2px;
 }
 
@@ -539,8 +548,26 @@ select::-ms-expand {
     transform: scale(0.8);
 }
 
-/* calendar widget */
 
+.list-container, .status-container{
+    width: 100%;
+}
+
+.todo-lists, .todo-status{
+    width: fit-content;
+}
+
+
+/* .list-container, .status-container, .priority-container{
+    padding-left: var(--grid-column-gap);
+} */
+
+
+
+
+
+
+/* calendar widget */
 .wc-datepicker, .wc-datepicker *, .wc-datepicker *:before, .wc-datepicker *:after, .wc-datepicker__month-select, .sc-wc-datepicker.wc-datepicker__month-select select{
     background-color: #242424;
     color: var(--fonts-white-color);
@@ -561,8 +588,27 @@ select::-ms-expand {
 .wc-datepicker__month-select, .wc-datepicker__year-select{
     transform: scale(1.2);
 }
-
 /* calendar widget */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* effects */
@@ -577,7 +623,9 @@ select::-ms-expand {
 .todo-status:hover,
 .todo-lists:hover,
 .todo-priority:hover,
-.todo-due-date:hover{
+.todo-due-date:hover,
+.list-container:hover,
+.status-container:hover{
     cursor: pointer;
     border-radius: 3px;
     background-color: rgb(49 49 49);
@@ -614,5 +662,55 @@ button:hover{
 
 .image-visible{
     visibility: visible;
+}
+
+.expand-icon-effect{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: ease 0.05s;
+}
+
+
+.open-task-form::after{
+    content: "";
+    position: absolute;
+    top: calc(var(--y, 0) * 1px - 50px);
+    left: calc(var(--x, 0) * 1px - 50px);
+    width: 150px;
+    height: 100px;
+    border-radius: 70%;
+    /* background: radial-gradient(white, #3984ff00 80%); */
+    /* background: linear-gradient(in hsl longer hue 45deg, red 0 0); */
+    background: linear-gradient(
+        67deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 15%,
+        rgba(208, 222, 33, 1) 20%,
+        rgba(79, 220, 74, 1) 30%,
+        rgba(63, 218, 216, 1) 40%,
+        rgba(47, 201, 226, 1) 50%,
+        rgba(28, 127, 238, 1) 60%,
+        rgba(95, 21, 242, 1) 70%,
+        rgba(186, 12, 248, 1) 80%,
+        rgba(251, 7, 217, 1) 85%,
+        rgba(255, 0, 0, 1) 90%
+    );
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.open-task-form:hover::after{
+    opacity: 0.2;
+}
+
+.open-task-form:hover{
+    background-color: rgb(49 49 49);
+}
+
+
+.done{
+    text-decoration: line-through;
+    font-style: italic;
+    color: rgb(144, 144, 144)
 }
 /* effects */

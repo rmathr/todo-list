@@ -23,6 +23,8 @@ import handleSaveLogic from "./handleSaveLogic"
 import { deleteTask } from "./todoCreator"
 import { getFromLocalStorage } from "./handleSaveLogic"
 import { handleEffects } from "./handleEffects"
+import { hex2rgba } from "./handleEffects"
+import { handleNewListLogic } from "./handleNewListLogic"
 
 import arrowRight  from './right.png'
 
@@ -190,35 +192,44 @@ handleNewTaskForm()
 
 
   
-const newList = interactDOM().hookDOMelement('newList')
+// const newList = interactDOM().hookDOMelement('newList')
 
-newList.addEventListener('click', e => {
-    handleNewListForm(e)
+// newList.addEventListener('click', e => {
+//     handleNewListForm(e)
+// })
+
+
+// const addNewList = interactDOM().hookDOMelement('addNewList')
+
+// const addList = function (){
+//     let listName = interactDOM().getInputValue('listName')
+//     let color = interactDOM().getInputValue('listColor')
+//     let description = interactDOM().getInputValue('listDescription')
+//     createNewList(`${listName}`, `${color}`, `${description}`)
+//     const lists = getFromLocalStorage('lists')
+//     displayLists(lists)
+//     updateListOptions(lists)
+//     interactDOM().formReset('addListForm')
+//     handleEffects()
+// }
+
+// addNewList.addEventListener('click', e =>{
+//     const newListForm = interactDOM().hookDOMelement('newListForm')
+//     e.preventDefault()
+//     interactDOM().hide(newListForm)
+//     addList()
+//     // displayLists(lists)
+//     // updateListOptions(lists)
+// })
+handleNewListLogic()
+
+
+document.body.addEventListener('keydown', e =>{
+    console.log(e.key)
 })
 
 
-const addNewList = interactDOM().hookDOMelement('addNewList')
 
-const addList = function (){
-    let listName = interactDOM().getInputValue('listName')
-    let color = interactDOM().getInputValue('listColor')
-    let description = interactDOM().getInputValue('listDescription')
-    createNewList(`${listName}`, `${color}`, `${description}`)
-    const lists = getFromLocalStorage('lists')
-    displayLists(lists)
-    updateListOptions(lists)
-    interactDOM().formReset('addListForm')
-    handleEffects()
-}
-
-addNewList.addEventListener('click', e =>{
-    const newListForm = interactDOM().hookDOMelement('newListForm')
-    e.preventDefault()
-    interactDOM().hide(newListForm)
-    addList()
-    // displayLists(lists)
-    // updateListOptions(lists)
-})
 
 displayLists(lists)
 updateListOptions(lists)
@@ -231,6 +242,7 @@ function completeTask(element) {
     const index = +`${element.id}`.replace("checktask#", "")
     // console.log(element)
     modifyStatus(index, 'done', todos) 
+    handleEffects()
 }
 // =============== checkbox 'done' logic
 
@@ -267,17 +279,5 @@ handleFilterOrder(lists, todos)
 
 console.log(todos)
 
-// document.body.addEventListener('mousedown', e =>{
-//     console.log(e.target.getBoundingClientRect())
-// })
-
-
-// document.body.addEventListener('mouseover', e => {
-//     if(e.target.classList.contains('delete-list-img')){
-//         console.log('entered!')
-//         e.target.style.cursor = 'pointer'
-//         e.target.style.transform = 'scale(1.1)'
-//     }
-// })
 
 handleEffects()

@@ -92,7 +92,7 @@
 
     <section class="new-list-form" id="newListForm" style="display: none;">
         <p class="new-list-form-title">List</p>
-        <form action="" class="add-list-form" id="addListForm">
+        <form action="" class="add-list-form" id="addListForm" autocomplete="off">
             <div class="label-input-name">
                 <label for="listName">Name</label>
                 <div class="name-color">
@@ -108,8 +108,8 @@
             
         </form>
         <section class="new-list-buttons" id="newListButtons">
-            <button class="cancel-list-add" id="cancelListAdd">Cancel</button>
-            <button class="add-new-list" id="addNewList">Create</button>
+            <button class="cancel-list-add" id="cancelListAdd">Cancel <span class="label-button">Esc</span></button>
+            <button class="add-new-list" id="addNewList">Create <span class="label-button">Enter</span></button>
         </section>
         
     </section>

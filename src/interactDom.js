@@ -51,15 +51,21 @@ const interactDOM = function(){
 
     const appendElementAndDefineContent = function (container, obj, index) {
         let task = interactDOM().createElementWithClassAndId('p', 'todo-tasks', `task${index}`)
+        let statusContainer = interactDOM().createElementWithClassAndId('span', 'status-container', `statusContainer${index}`)
         let status = interactDOM().createElementWithClassAndId('p', 'todo-status', `status${index}`)
+        let listContainer = interactDOM().createElementWithClassAndId('span', 'list-container', `listContainer${index}`)
         let list = interactDOM().createElementWithClassAndId('p', 'todo-lists', `list${index}`)
+        let priorityContainer = interactDOM().createElementWithClassAndId('span', 'priority-container', `priorityContainer${index}`)
         let priority = interactDOM().createElementWithClassAndId('p', 'todo-priority', `priority${index}`)
         let dueDate = interactDOM().createElementWithClassAndId('p', 'todo-due-date', `dueDate${index}`)
         container.appendChild(task)
-        container.appendChild(status)
-        container.appendChild(list)
-        container.appendChild(priority)
+        container.appendChild(statusContainer)
+        container.appendChild(listContainer)
+        container.appendChild(priorityContainer)
         container.appendChild(dueDate)
+        statusContainer.appendChild(status)
+        listContainer.appendChild(list)
+        priorityContainer.appendChild(priority)
         task.textContent = `${obj.task}`
         status.textContent = `${obj.status}`
         list.textContent = `${obj.list}`
