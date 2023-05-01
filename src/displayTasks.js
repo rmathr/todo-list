@@ -10,7 +10,7 @@ export default function displayTasks(array){
         let container = interactDOM().createElementWithClassAndId('div', 'todos', `todo${array[i].order}`)
         let checkTask = interactDOM().createElementWithClassAndId('button', 'check-task', `checktask#${i}`)
         let deleteTask = interactDOM().createElementWithClassAndId('button', 'delete-task', `${i}`)
-        let deleteImage = interactDOM().createElementWithClassAndId('img', 'delete-image', 'deleteImage')
+        let deleteImage = interactDOM().createElementWithClassAndId('img', 'delete-image', `deleteImage#${i}`)
         deleteImage.src = x
         deleteTask.appendChild(deleteImage)
         container.appendChild(checkTask)

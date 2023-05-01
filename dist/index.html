@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../src/tasks.png">
+    <!-- <link rel="icon" href="../src/tasks.png"> -->
     <!-- <link rel="stylesheet" href="../node_modules/wc-datepicker/dist/themes/dark.css" /> -->
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
@@ -14,13 +14,13 @@
     src="https://cdn.jsdelivr.net/npm/wc-datepicker/dist/esm/wc-datepicker.js"
   defer></script> -->
     
-    <title>Todo!</title>
+    <title>zenith</title>
 </head>
 <body>
     <div class="main-container" id="mainContainer">
         <section class="sidebar" id="sidebar">
             <div class="sidebar-brand" id="sidebarBrand">
-                <img class="image-brand" src="../src/tasks.png" srcset="">
+                <!-- <img class="image-brand" src="../src/tasks.png" srcset=""> -->
                 <p class="sidebar-title" id="sidebarTitle">zenith</p>
             </div>
             <section class="lists-view" id="listsView">
@@ -48,8 +48,8 @@
     
                 <form action="" class="new-task" id="newTask" style="display:none">
                     <span></span>
-                    <input type="text" name="taskInput" id="taskInput" placeholder="Enter a new task!">
-                    <select name="statusInput" id="statusInput">
+                    <input type="text" name="taskInput" id="taskInput" placeholder="Enter a new task!" required>
+                    <select name="statusInput" id="statusInput" required>
                         <option value="" selected hidden disabled>status</option>
                         <option value="to-do">to-do</option>
                         <option value="doing">doing</option>
@@ -58,15 +58,15 @@
                     </select>
                     
                     <!-- <input type="text" name="listInput" id="listInput" placeholder="List"> -->
-                   <select name="listInput" id="listInput"></select>
+                   <select name="listInput" id="listInput" required></select>
     
-                    <select name="priorityInput" id="priorityInput">
+                    <select name="priorityInput" id="priorityInput" required>
                         <option value="" selected hidden disabled>priority</option>
                         <option value="high">high</option>
                         <option value="medium">medium</option>
                         <option value="low">low</option>
                     </select>
-                    <input type="text" name="dueDateInput" id="dueDateInput" placeholder="due date">
+                    <input type="text" name="dueDateInput" id="dueDateInput" placeholder="due date" required>
                     <!-- <wc-datepicker id="dueDateInput"></wc-datepicker> -->
                     <!-- <input type="date" name="dueDateInput" id="dueDateInput" placeholder="due date"> -->
                     <button type="submit" class="add-task" id="addTask">+</button>

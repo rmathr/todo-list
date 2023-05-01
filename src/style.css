@@ -9,8 +9,8 @@
     --fonts-white-color: #e8e8e8;
     --border-gray-color: rgba(232, 232, 232, 0.1);
     --background-main-content: #242424;
-    --grid-column-tasks: 1rem minmax(24rem, 35rem) 8rem 12rem 8rem 8rem 1rem;
-    --grid-column-titles: minmax(25rem, 36rem) 8rem 12rem 8rem 9rem;
+    --grid-column-tasks: 1rem minmax(22rem, 33rem) 8rem 12rem 8rem 8rem 1rem;
+    --grid-column-titles: minmax(23rem, 34rem) 8rem 12rem 8rem 9rem;
     --grid-row-size: 2rem;
     --grid-column-gap: 10px;
     --dynamic-background-color: #242424;
@@ -101,7 +101,7 @@ body {
 
 .main-content{
     flex-grow: 1;
-    background-color: #242424;
+    background-color: var(--background-main-content);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -129,7 +129,8 @@ body {
     grid-template-columns: var(--grid-column-tasks);
     /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
-    border-bottom: 1px solid rgba(232, 232, 232, 0.1);
+
+    border-bottom: 1px solid var(--border-gray-color);
 }
 
 .todos > * {
@@ -159,13 +160,12 @@ body {
     padding-left: var(--grid-column-gap);
 }
 
-.todo-lists, .todo-status{
+.todo-lists, .todo-status, .todo-tasks{
     /* opacity: 0.7; */
     border-radius: 3px;
     line-height: 1.5rem;
     padding-right: var(--grid-column-gap);
 }
-
 
 
 .new-task > :not(:first-child){
@@ -292,6 +292,7 @@ body {
 .delete-image{
     width: 12px;
     height: auto;
+    visibility: hidden;
 }
 
 .delete-list-img{
@@ -416,6 +417,10 @@ textarea{
     margin-left: 4px;
 }
 
+.cancel-list-add, .add-new-list{
+    position: relative;
+    overflow: hidden;
+}
 
 
 /* ========================= new list form ========================= */
@@ -500,6 +505,11 @@ select::-ms-expand {
     line-height: 25px;
     color: var(--fonts-white-color);
 }
+
+#changeTaskInput{
+    color: var(--forms-font-color)
+}
+
 
 .expanded-menu button {
     /* width: 70%; */
@@ -671,7 +681,7 @@ button:hover{
 }
 
 
-.open-task-form::after{
+.open-task-form::after, .cancel-list-add::after, .add-new-list::after{
     content: "";
     position: absolute;
     top: calc(var(--y, 0) * 1px - 50px);
@@ -699,11 +709,11 @@ button:hover{
     transition: opacity 0.2s;
 }
 
-.open-task-form:hover::after{
+.open-task-form:hover::after, .cancel-list-add:hover::after, .add-new-list:hover::after{
     opacity: 0.2;
 }
 
-.open-task-form:hover{
+.open-task-form:hover, .cancel-list-add:hover, .add-new-list:hover{
     background-color: rgb(49 49 49);
 }
 

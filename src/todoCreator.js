@@ -1,13 +1,7 @@
 import displayTasks from "./displayTasks"
 import { getFromLocalStorage } from "./handleSaveLogic";
 import { addToLocalStorage } from "./handleSaveLogic";
-
-// function addToLocalStorage(todos) {
-//     // conver the array to string then store it.
-//     localStorage.setItem('todos', JSON.stringify(todos));
-   
-//     displayTasks(todos);
-//   }
+import { handleEffects } from "./handleEffects";
 
 
 const deleteTask = (index) => {
@@ -16,6 +10,7 @@ const deleteTask = (index) => {
     todos.forEach(todo => todo.order = todos.indexOf(todo))
     addToLocalStorage(todos, 'todos')
     displayTasks(todos)
+    handleEffects()
 }
 
 
@@ -27,10 +22,6 @@ function defineTaskId (todos) {
 
 function modifyTask (index, taskValue) {
     let todos = getFromLocalStorage('todos')
-    // const todo = createNewTask(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`, todos)
-    // const todo = todoCreator(`${taskValue}`, `${todos[index].status}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
-    
-    // todos.splice(index, 1, todo)
     const correctIndex = todos.findIndex(item => item.order == index)
     todos[correctIndex].task = `${taskValue}`
     addToLocalStorage(todos, 'todos')
@@ -40,9 +31,7 @@ function modifyTask (index, taskValue) {
 
 function modifyStatus (index, statusValue) {
     let todos = getFromLocalStorage('todos')
-    // const todo = todoCreator(`${todos[index].task}`, `${statusValue}`, `${todos[index].list}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
-    // todos.splice(index, 1, todo)
     todos[correctIndex].status = `${statusValue}`
     addToLocalStorage(todos, 'todos')
     displayTasks(todos)
@@ -50,9 +39,7 @@ function modifyStatus (index, statusValue) {
 
 function modifyPriority (index, priorityValue) {
     let todos = getFromLocalStorage('todos')
-    // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${todos[index].list}`, `${priorityValue}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
-    // todos.splice(index, 1, todo)
     todos[correctIndex].priority = `${priorityValue}`
     addToLocalStorage(todos, 'todos')
     displayTasks(todos)
@@ -60,9 +47,7 @@ function modifyPriority (index, priorityValue) {
 
 function modifyList (index, listValue) {
     let todos = getFromLocalStorage('todos')
-    // const todo = todoCreator(`${todos[index].task}`, `${todos[index].status}` , `${listValue}`, `${todos[index].priority}`, `${todos[index].dueDate}`)
     const correctIndex = todos.findIndex(item => item.order == index)
-    // todos.splice(index, 1, todo)
     todos[correctIndex].list = `${listValue}`
     addToLocalStorage(todos, 'todos')
     displayTasks(todos)
@@ -98,20 +83,10 @@ const createNewTask = (task, status, list, priority, dueDate) => {
     // displayTasks(todos)
     console.log(todos)
     const todo = todoCreator(task, status, list, priority, dueDate)
-    // const newTodos = todos
     todos.push(todo)
     todo.order = todos.length - 1
     console.log(todos)
-    
     addToLocalStorage(todos, 'todos')
-    
-    // const tempObj = newTodos[newTodos.indexOf(todo)]
-    // console.log(tempObj)
-    // const tempTodos = JSON.parse(localStorage.getItem('todos') || '[]')
-    
-    // if(tempTodos.indexOf(tempObj) == -1){
-    //     localStorage.setItem('todos', JSON.stringify(newTodos))
-    // }
     return todo
 } 
 

@@ -4,27 +4,24 @@ import { modifyStatus }  from "./todoCreator";
 import { getFromLocalStorage } from "./handleSaveLogic";
 import { handleEffects } from "./handleEffects";
 
-export default function controlStatusChange(element, index){
+
+function completeTask(element) {
+    const index = +`${element.id}`.replace("checktask#", "")
+    const todos = getFromLocalStorage('todos')
+    // console.log(element)
+    modifyStatus(index, 'done', todos) 
+    handleEffects()
+}
+
+
+
+function controlStatusChange(element, index){
     let todos = getFromLocalStorage('todos')
     const buttons = ['to-do', 'doing', 'done', 'wont do'];
     const { top, left } = element.getBoundingClientRect()
 
     const changeStatus = interactDOM().generateListOptions({top, left}, buttons, 'status')
-    // const changeStatus = interactDOM().hookDOMelement('changeStatus')
-    // const changeStatus = interactDOM().createElementWithClassAndId('div', 'change-status', 'changeStatus')
-    //     buttons.forEach((button) => {
-    //       const buttonElement = interactDOM().createElementWithClassAndId('button', 'change-status-button', `${buttons[buttons.indexOf(button)]}#id`)
-    //       buttonElement.value = button;
-    //       buttonElement.textContent = button;
-    //       changeStatus.appendChild(buttonElement);
-    //     });
-    // // interactDOM().toggleElementDisplay(changeStatus)
-    // changeStatus.style.position = 'absolute'
-    // changeStatus.style.display = 'flex'
-    // changeStatus.style.top = `${top}px`;
-    // changeStatus.style.left = `${left}px`; 
-    // document.body.appendChild(changeStatus);
-
+    
 
     document.addEventListener('mousedown', e =>{
         changeStatus.remove()
@@ -38,7 +35,7 @@ export default function controlStatusChange(element, index){
 
     changeStatus.addEventListener('mousedown', e =>{
         if (e.target.classList.contains('change-status-button')){
-             console.log(e.target.value);
+            //  console.log(e.target.value);
              modifyStatus(index, `${e.target.value}`)
             //  interactDOM().hide(changeStatus);
             changeStatus.remove()
@@ -47,3 +44,6 @@ export default function controlStatusChange(element, index){
         }
      })
 }
+
+
+export { completeTask, controlStatusChange }

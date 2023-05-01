@@ -81,6 +81,26 @@ function handleEffects(){
             list.style.backgroundColor = `transparent`
         })
     })
+
+    const todos = interactDOM().returnAllMatchingElements('todos')
+    todos.forEach(todo => {
+
+        todo.addEventListener('mouseenter', e=> {
+           const imageIndex = "deleteImage#" + todo.id.match(/\d+/)[0]
+        //    console.log(imageIndex)
+           interactDOM().hookDOMelement(imageIndex).classList.add('image-visible')
+        })
+
+        todo.addEventListener('mouseleave', e => {
+            const imageIndex = "deleteImage#" + todo.id.match(/\d+/)[0]
+            interactDOM().hookDOMelement(imageIndex).classList.remove('image-visible')
+        })
+
+
+
+    })
+
+
     const listItem = interactDOM().returnAllMatchingElements('list-item')
     listItem.forEach(list => {
         list.addEventListener('mousedown', e => {
@@ -105,6 +125,7 @@ function handleEffects(){
     todoStatus.forEach(status => {
         if(status.textContent == 'done'){
             status.style.backgroundColor = 'var(--done-background-color)'
+            status.style.color = 'var(--background-main-content)'
             const index = +`${status.id}`.replace("status", "")
             const taskIndex = 'task' + index
             const priorityIndex = 'priority' + index
@@ -127,19 +148,19 @@ function handleEffects(){
         formatDistanceToNowStrict(new Date(duedate.textContent)) == '2 days' ||
         formatDistanceToNowStrict(new Date(duedate.textContent)) == '3 days' || 
         formatDistanceToNowStrict(new Date(duedate.textContent)) == '4 days' || 
-        formatDistanceToNowStrict(new Date(duedate.textContent)) == '5 days'){
+        formatDistanceToNowStrict(new Date(duedate.textContent)) == '5 days' ||
+        formatDistanceToNowStrict(new Date(duedate.textContent)).includes('seconds') ||
+        formatDistanceToNowStrict(new Date(duedate.textContent)).includes('minutes') ||
+        formatDistanceToNowStrict(new Date(duedate.textContent)).includes('hours')
+        ){
             duedate.style.color = 'var(--due-date-yellow)'
         }
     })
 
-    const openTaskForm = interactDOM().hookDOMelement('openTaskForm')
-    openTaskForm.addEventListener('mousemove', e=> {
-        const { x, y } = openTaskForm.getBoundingClientRect();
-        openTaskForm.style.setProperty("--x", e.clientX - x);
-        openTaskForm.style.setProperty("--y", e.clientY - y);
-    })
 
-    
+    interactDOM().handleMouseMovementEffect('openTaskForm')
+    interactDOM().handleMouseMovementEffect('cancelListAdd')
+    interactDOM().handleMouseMovementEffect('addNewList')
 
 
 

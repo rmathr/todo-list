@@ -1,4 +1,8 @@
 import format  from "date-fns/format"
+import tasks from './tasks.png'
+
+
+
 
 const interactDOM = function(){
     const mainContent = document.getElementById('mainContent')
@@ -30,13 +34,6 @@ const interactDOM = function(){
         } else if (arguments.length == 1){
             element.style.display == 'flex' ? element.style.display = 'none' : element.style.display = 'flex'
         }
-        
-        
-        // if(element.style.display == 'flex'){
-        //     element.style.display = 'none'
-        // } else {
-        //     element.style.display = 'flex'
-        // }
     }
 
    
@@ -107,6 +104,15 @@ const interactDOM = function(){
     form.reset()    
     }
     
+    const handleMouseMovementEffect = function(elementId){
+        const element = interactDOM().hookDOMelement(elementId)
+    element.addEventListener('mousemove', e=> {
+        const { x, y } = element.getBoundingClientRect();
+        element.style.setProperty("--x", e.clientX - x);
+        element.style.setProperty("--y", e.clientY - y);
+    })
+    }
+
     return { 
         mainContent, 
         createElementWithClassAndId, 
@@ -119,8 +125,28 @@ const interactDOM = function(){
         hide,
         show,
         generateListOptions,
-        formReset 
+        formReset,
+        handleMouseMovementEffect 
     }
 }
+
+const handleImageBrand = (function(){
+    const imageBrand = interactDOM().createElementWithClassAndId('img', 'image-brand', 'imageBrand')
+    imageBrand.src = tasks
+    const sidebarBrand = interactDOM().hookDOMelement('sidebarBrand')
+    sidebarBrand.insertAdjacentElement("afterbegin", imageBrand)
+    
+    
+    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/png';
+    link.rel = 'shortcut icon';
+    link.href = tasks;
+    document.getElementsByTagName('head')[0].appendChild(link);
+})()
+
+
+
+    
+
 
 export default interactDOM
