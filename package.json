@@ -27,8 +27,6 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@easepick/amp-plugin": "^1.2.1",
-    "@easepick/bundle": "^1.2.1",
     "date-fns": "^2.29.3",
     "wc-datepicker": "^0.5.2"
   }

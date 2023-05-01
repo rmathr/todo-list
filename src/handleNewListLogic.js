@@ -25,18 +25,13 @@ function handleNewListLogic (){
         handleNewListForm(e)
     })
     
-    
     const addNewList = interactDOM().hookDOMelement('addNewList')
-    
-    
     
     addNewList.addEventListener('click', e =>{
         const newListForm = interactDOM().hookDOMelement('newListForm')
         e.preventDefault()
         interactDOM().hide(newListForm)
         addList()
-        // displayLists(lists)
-        // updateListOptions(lists)
     })
 
 

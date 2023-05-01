@@ -18,9 +18,6 @@ export default function sortByTitle(element, todos, title){
             break;
     }
 
-
-    console.log(sortedArray)
-    
     displayTasks(sortedArray)
 }
 

@@ -75,12 +75,8 @@ function todoCreator(task, status, list, priority, dueDate){
     return Object.assign(todo)
 }
 
-
-
-
 const createNewTask = (task, status, list, priority, dueDate) => {
     const todos = getFromLocalStorage('todos')
-    // displayTasks(todos)
     console.log(todos)
     const todo = todoCreator(task, status, list, priority, dueDate)
     todos.push(todo)

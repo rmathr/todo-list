@@ -1,5 +1,4 @@
 import interactDOM from "./interactDom"
-// import loopTodos from "./loopTodos"
 import x from './crossed.png'
 
 export default function displayTasks(array){

@@ -50,7 +50,6 @@ export default function handleTasksAndListsEdits(){
         if(e.target.classList.contains('list-item')){
             const todos = getFromLocalStorage('todos')
             const lists = getFromLocalStorage('lists')
-            console.log(e.target)
             filterByList(e.target, lists, todos)
         } else if(e.target.parentNode.classList.contains('delete-list')){
             const index = +`${e.target.parentNode.id}`.replace("deleteList#", "")

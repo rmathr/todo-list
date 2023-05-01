@@ -1,9 +1,6 @@
 import format  from "date-fns/format"
 import tasks from './tasks.png'
 
-
-
-
 const interactDOM = function(){
     const mainContent = document.getElementById('mainContent')
 
@@ -77,26 +74,23 @@ const interactDOM = function(){
     }
 
 
-    const generateListOptions = function ({top, left}, array, property){
-        
+    const generateListOptions = function ({ top, left }, array, property) {
+
         const element = interactDOM().createElementWithClassAndId('div', `change-${property}`, `change${property}Id`)
-        // const buttons = ['to-do', 'doing', 'done', 'wont do'];
         const buttons = array;
         buttons.forEach((button) => {
-          const buttonElement = interactDOM().createElementWithClassAndId('button', `change-${property}-button`, `${property}change${buttons.indexOf(button)}#id`)
-          buttonElement.value = button;
-          buttonElement.textContent = button;
-          element.appendChild(buttonElement);
+            const buttonElement = interactDOM().createElementWithClassAndId('button', `change-${property}-button`, `${property}change${buttons.indexOf(button)}#id`)
+            buttonElement.value = button;
+            buttonElement.textContent = button;
+            element.appendChild(buttonElement);
         });
-    
-   
-    element.style.position = 'absolute'
-    element.style.display = 'flex'
-    element.style.top = `${top}px`;
-    element.style.left = `${left}px`; 
-    document.body.appendChild(element);
 
-    return element
+        element.style.position = 'absolute'
+        element.style.display = 'flex'
+        element.style.top = `${top}px`;
+        element.style.left = `${left}px`;
+        document.body.appendChild(element);
+        return element
     }
 
     const formReset = function(formId){
@@ -143,10 +137,5 @@ const handleImageBrand = (function(){
     link.href = tasks;
     document.getElementsByTagName('head')[0].appendChild(link);
 })()
-
-
-
-    
-
 
 export default interactDOM

@@ -38,6 +38,8 @@ body {
     min-height: 100dvh;
 }
 
+
+/* ====================== sidebar ====================== */
 .sidebar{
     width: 220px;
     background-color: #121212;
@@ -45,7 +47,6 @@ body {
     display: flex;
     flex-direction: column;
     border-right: 3px solid var(--border-gray-color);
-    /* box-shadow: -1px 2px 38px -2px var(--border-gray-color); */
 }
 
 .image-brand{
@@ -76,7 +77,6 @@ body {
 .lists-view-title{
     height: 1.6rem;
     width: 90%;
-    /* border-bottom: 1px solid rgba(232, 232, 232, 0.1); */
     padding: 0 5px; 
     font-size: 1.3rem;
 }
@@ -98,6 +98,24 @@ body {
 }
 
 
+.footer{
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--forms-font-color);
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+.fa-github {
+  margin: 12px;
+  color: inherit;
+}
+
+/* ====================== sidebar ====================== */
+
 
 .main-content{
     flex-grow: 1;
@@ -111,25 +129,15 @@ body {
 
 .todos-view{
     width: 90%;
-    /* width: fit-content; */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
 }
 
 .todos{
-    /* display: flex;
-    flex-direction: row; */
     display: grid;
-    /* width: fit-content; */
-    /* grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr; */
-    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
-    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7rem 8rem 7rem 7rem 1rem; */
     grid-template-columns: var(--grid-column-tasks);
-    /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
-
     border-bottom: 1px solid var(--border-gray-color);
 }
 
@@ -145,12 +153,8 @@ body {
 .todos-general-titles {
     display: flex;
     flex-direction: row;
-    /* font-weight: 700; */
-    /* width: 90%; */
     display: grid;
-    /* grid-template-columns: 16fr 7fr 7fr 7fr 8fr; */
     grid-template-columns: var(--grid-column-titles);
-    /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
     border-bottom: 1px solid rgba(232, 232, 232, 0.1);
     text-transform: capitalize;
@@ -160,8 +164,7 @@ body {
     padding-left: var(--grid-column-gap);
 }
 
-.todo-lists, .todo-status, .todo-tasks{
-    /* opacity: 0.7; */
+.todo-lists, .todo-status, .todo-tasks, .todo-due-date, .todo-priority{
     border-radius: 3px;
     line-height: 1.5rem;
     padding-right: var(--grid-column-gap);
@@ -202,9 +205,6 @@ body {
 }
 
 .change-status, .change-priority, .change-list{
-    /* display: none; */
-    /* width: 100px; */
-    /* height: 120px; */
     flex-direction: column;
     position: absolute;
 }
@@ -214,19 +214,12 @@ body {
     display: flex;
     flex-direction: column;
     width: 90%;
-   
-    /* align-items: center; */
-    /* display: grid;
-    grid-template-columns: 1fr 8fr; */
-    /* grid-template-columns: 1fr 15fr 7fr 7fr 7fr 7fr 1fr; */
 }
 
 
 .new-task{
     display: grid;
     grid-template-columns: var(--grid-column-tasks);
-    /* grid-template-columns: 1rem minmax(16rem, 25rem) 7fr 8fr 7fr 7fr 1fr; */
-    /* grid-template-rows: 1.6rem; */
     grid-template-rows: var(--grid-row-size);
     border-bottom: 1px solid var(--border-gray-color);
 }
@@ -236,7 +229,6 @@ body {
 }
 
 .open-task-form{
-    /* height: 1.6rem; */
     height: var(--grid-row-size);
     width: fit-content;
     margin-top: 4px;
@@ -253,10 +245,7 @@ body {
     background-color: transparent;
     border: none;
     font-size: 1rem;
-    /* align-self: flex-start; */
 }
-
-
 
 .new-list{
     margin-top: 12px;
@@ -269,7 +258,6 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 20%;
-    /* border: 0.5px solid #e8e8e8; */
     height: auto;
     margin-right: 4px;
 }
@@ -422,8 +410,9 @@ textarea{
     overflow: hidden;
 }
 
-
 /* ========================= new list form ========================= */
+
+
 
 .clicked{
     background-color: var(--done-background-color);
@@ -455,14 +444,12 @@ input[type=text]:focus, input[type=number]:focus, select:focus {
     border-radius: 0.25em;
     background-color: var(--background-main-content);
     color: var(--forms-font-color);
-    /* box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2); */
     cursor: pointer;
 }
 select option {
     color: var(--fonts-white-color);
     background-color: var(--background-dropdown-menus);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    /* border: 1px solid rgba(232, 232, 232, 0.1); */
     border: 0px;
     border-radius: 2px;
 }
@@ -482,15 +469,14 @@ select::-ms-expand {
     align-self: center;
 }
 
+#taskInput {
+    color: var(--forms-font-color);
+}
+
 /* edit task */
-
-
-
 
 .expanded-menu, .expanded-filter-menu, .expanded-sort-menu, .change-status-button, .change-list-button, .change-priority-button{
     width: 150px;
-    /* width: fit-content; */
-    /* height: 50px; */
     display: flex;
     flex-direction: column;
     z-index: 1;
@@ -512,7 +498,6 @@ select::-ms-expand {
 
 
 .expanded-menu button {
-    /* width: 70%; */
     height: 25px;
     color: #e8e8e8;
     background-color: transparent;
@@ -521,9 +506,6 @@ select::-ms-expand {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    /* display: grid;
-    grid-template-columns: auto 12px;
-    grid-template-rows: auto; */
 }
 
 .expanded-filter-menu button, .expanded-sort-menu button {
@@ -534,10 +516,7 @@ select::-ms-expand {
 }
 
 .filter-sort-text{
-    
     flex-grow: 1;
-    /* height: 25px; */
-
 }
 
 .expanded-menu button:not(:first-child), .expanded-filter-menu button:not(:first-child), .expanded-sort-menu button:not(:first-child)  {
@@ -567,16 +546,6 @@ select::-ms-expand {
     width: fit-content;
 }
 
-
-/* .list-container, .status-container, .priority-container{
-    padding-left: var(--grid-column-gap);
-} */
-
-
-
-
-
-
 /* calendar widget */
 .wc-datepicker, .wc-datepicker *, .wc-datepicker *:before, .wc-datepicker *:after, .wc-datepicker__month-select, .sc-wc-datepicker.wc-datepicker__month-select select{
     background-color: #242424;
@@ -599,25 +568,6 @@ select::-ms-expand {
     transform: scale(1.2);
 }
 /* calendar widget */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -656,7 +606,6 @@ button:hover{
 }
 
 #listName:focus, #listDescription:focus{
-    /* border: 2px solid rgba(232, 232, 232, 0.1);   */
     border: 2px solid rgb(94,94,94);  
 }
 
@@ -680,7 +629,6 @@ button:hover{
     transition: ease 0.05s;
 }
 
-
 .open-task-form::after, .cancel-list-add::after, .add-new-list::after{
     content: "";
     position: absolute;
@@ -689,8 +637,6 @@ button:hover{
     width: 150px;
     height: 100px;
     border-radius: 70%;
-    /* background: radial-gradient(white, #3984ff00 80%); */
-    /* background: linear-gradient(in hsl longer hue 45deg, red 0 0); */
     background: linear-gradient(
         67deg,
         rgba(255, 0, 0, 1) 0%,
@@ -716,7 +662,6 @@ button:hover{
 .open-task-form:hover, .cancel-list-add:hover, .add-new-list:hover{
     background-color: rgb(49 49 49);
 }
-
 
 .done{
     text-decoration: line-through;

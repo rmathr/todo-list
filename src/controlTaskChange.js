@@ -1,13 +1,10 @@
 import interactDOM from "./interactDom";
-import displayTasks from "./displayTasks";
 import { modifyTask}  from "./todoCreator";
-import { addToLocalStorage } from "./handleSaveLogic";
 import { getFromLocalStorage } from "./handleSaveLogic";
 import { handleEffects } from "./handleEffects";
 
 export default function controlTaskChange(element, index){
     let todos = getFromLocalStorage('todos')
-    // const buttons = ['low', 'medium', 'high'];
     const correctIndex = todos.findIndex(item => item.order == index)
     const { top, left } = element.getBoundingClientRect()
     const changeTask = interactDOM().createElementWithClassAndId('input', 'change-task-input', 'changeTaskInput')
@@ -26,7 +23,6 @@ export default function controlTaskChange(element, index){
             modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
             handleEffects()
-            // displayTasks(todos)
         }
     })
     
@@ -35,22 +31,6 @@ export default function controlTaskChange(element, index){
             modifyTask(index, `${changeTask.value}`)
             changeTask.remove()
             handleEffects()
-            // displayTasks(todos) 
         }
     })
-
-
-
-    // changePriority.addEventListener('mouseleave', e => {
-    //     setInterval( function() {changePriority.remove()}, 500)
-    // })
-    // changePriority.addEventListener('mousedown', e =>{
-    //     if (e.target.classList.contains('change-priority-button')){
-    //          console.log(e.target.value);
-    //          modifyPriority(index, `${e.target.value}`, todos)
-    //         //  interactDOM().hide(changeStatus);
-    //         changePriority.remove()
-    //          displayTasks(todos)  
-    //     }
-    //  })
 }

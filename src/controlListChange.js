@@ -20,9 +20,6 @@ function updateListOptions(lists){
 })
 }
 
-
-
-
 function controlListChange(element, index){
     const todos = getFromLocalStorage('todos')
     const lists = getFromLocalStorage('lists')
@@ -35,17 +32,11 @@ function controlListChange(element, index){
         
     })
     
-    // changePriority.addEventListener('mouseleave', e => {
-    //     setInterval( function() {changePriority.remove()}, 500)
-    // })
     changeList.addEventListener('mousedown', e =>{
         if (e.target.classList.contains('change-list-button')){
-             console.log(e.target.value);
              modifyList(index, `${e.target.value}`)
-            //  interactDOM().hide(changeStatus);
             handleEffects()
-            changeList.remove()
-            //  displayTasks(todos)  
+            changeList.remove() 
         }
      })
 }

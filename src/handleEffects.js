@@ -1,7 +1,5 @@
 import interactDOM from "./interactDom";
 import { getFromLocalStorage } from "./handleSaveLogic";
-import displayLists from "./displayLists";
-import format from "date-fns/format";
 import { formatDistanceToNowStrict } from 'date-fns'
 
 function hex2rgba (hex, alpha) {
@@ -13,12 +11,10 @@ function hex2rgba (hex, alpha) {
   };
 
 
-
 function handleEffects(){
     const titles = interactDOM().returnAllMatchingElements('todos-titles')
     titles.forEach(title => {
         title.addEventListener('mouseenter', e => {
-    //    console.log(titles)
        
         titles.forEach(title => title.classList.add('border-right-titles')) 
     })
@@ -87,7 +83,6 @@ function handleEffects(){
 
         todo.addEventListener('mouseenter', e=> {
            const imageIndex = "deleteImage#" + todo.id.match(/\d+/)[0]
-        //    console.log(imageIndex)
            interactDOM().hookDOMelement(imageIndex).classList.add('image-visible')
         })
 
@@ -117,7 +112,6 @@ function handleEffects(){
     todoLists.forEach(list => {
         const lists = getFromLocalStorage('lists')
         const color = lists.filter(item => item.listName == list.textContent).map(item => item.color)
-        // list.style.backgroundColor = `${color[0]}`
         list.style.backgroundColor = `${hex2rgba(color[0], 0.3)}`
     })
 
@@ -135,9 +129,6 @@ function handleEffects(){
             interactDOM().hookDOMelement(priorityIndex).classList.add('done')
             interactDOM().hookDOMelement(dueDateIndex).classList.add('done')
         }
-
-
-
     })
 
     const todoDueDate = interactDOM().returnAllMatchingElements('todo-due-date')
@@ -156,14 +147,9 @@ function handleEffects(){
             duedate.style.color = 'var(--due-date-yellow)'
         }
     })
-
-
     interactDOM().handleMouseMovementEffect('openTaskForm')
     interactDOM().handleMouseMovementEffect('cancelListAdd')
     interactDOM().handleMouseMovementEffect('addNewList')
-
-
-
 }
 
 

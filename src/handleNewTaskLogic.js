@@ -17,19 +17,15 @@ const handleNewTaskFormValidation = function(){
     }
 }
 
-
 const addTasks = function(){
     let task = interactDOM().getInputValue('taskInput')
     let status = interactDOM().getInputValue('statusInput')
     let list = interactDOM().getInputValue('listInput')
     let priority = interactDOM().getInputValue('priorityInput')
     let dueDate = interactDOM().getInputValue('dueDateInput')
-    // const todo = todoCreator(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
     createNewTask(`${task}`,`${status}`,`${list}`,`${priority}`,`${dueDate}`)
     const todos = getFromLocalStorage('todos')
     displayTasks(todos)
-    // console.log(todos)
-    // todos.push(todo)
     interactDOM().formReset('newTask')
     handleEffects()
 }
@@ -42,7 +38,6 @@ export default function handleNewTaskLogic(){
         if(handleNewTaskFormValidation()){
             addTasks()
         }
-        // displayTasks(todos)
     })
 
 }

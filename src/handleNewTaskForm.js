@@ -1,9 +1,6 @@
 import interactDOM from "./interactDom"
 import format from "date-fns/format"
 
-
-
-
 export default function handleNewTaskForm (){
     const openTaskForm = interactDOM().hookDOMelement('openTaskForm')
     const newTask = interactDOM().hookDOMelement('newTask')
@@ -22,7 +19,6 @@ export default function handleNewTaskForm (){
         const currentDate = format(new Date(), "P")
         datePicker.setAttribute('start-date', `${currentDate}`)
         datePicker.value = new Date(`${currentDate.replaceAll('-', '/')}`)
-
         datePicker.style.position = 'absolute'
         datePicker.style.display = 'flex'
         datePicker.style.top = `${top + 26}px`;
@@ -37,7 +33,6 @@ export default function handleNewTaskForm (){
     })
 
     document.body.addEventListener('mousedown', e => {
-        // e.stopPropagation()
         if(!e.target.parentNode.classList.contains('new-task') 
         && !e.target.parentNode.classList.contains('open-task-form') 
         && !e.target.closest('.new-due-date')){
