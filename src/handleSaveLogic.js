@@ -7,6 +7,7 @@ import {
   setDoc,
   doc,
   addDoc,
+  deleteDoc,
 } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
@@ -61,6 +62,30 @@ const createDocument = (collectionName, document) => {
   return addDoc(colRef, document);
 };
 
+async function getItemID(colName, order) {
+  const col = collection(db, colName);
+  const colSnapshot = await getDocs(col);
+  const dataArray = colSnapshot.docs.map((doc) => {
+    return { data: doc.data(), id: doc.id };
+  });
+  const id = dataArray.filter((item) => {
+    if (item.data.order === order) {
+      return item.id;
+    }
+  });
+  return id[0].id;
+}
+
+const teste2 = await getItemID('todos', 1);
+console.log(teste2);
+
+async function deleteItem(colName, order) {
+  const id = await getItemID(colName, order);
+  // const col = collection(db, colName);
+  // const colSnapshot = await getDocs(col);
+  // colSnapshot.doc(id).delete()
+  deleteDoc(id);
+}
 // data.map((item) => createDocument('todos', item));
 
 // await setDoc(doc(db, 'todos', data[0].order), data[0]);
@@ -97,4 +122,4 @@ function getFromLocalStorage(keyWord) {
   }
 }
 
-export { addToLocalStorage, getFromLocalStorage, addData, getData, db };
+export { addToLocalStorage, getFromLocalStorage, addData, getData, db, deleteItem };
