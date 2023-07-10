@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/rmathr/todo-list#readme",
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "gh-pages": "^5.0.0",
     "mini-css-extract-plugin": "^2.7.5",
     "webpack": "^5.77.0",
@@ -28,6 +29,8 @@
   },
   "dependencies": {
     "date-fns": "^2.29.3",
+    "dotenv": "^16.3.1",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "wc-datepicker": "^0.5.2"
   }
 }
